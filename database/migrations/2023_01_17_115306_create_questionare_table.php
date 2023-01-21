@@ -20,7 +20,7 @@ return new class extends Migration
             $table->integer('bd_month')->nullable();
             $table->integer('bd_day')->nullable();
             $table->integer('bd_year')->nullable();
-            $table->integer('zip_code')->nullable();
+            $table->mediumText('zip_code')->nullable();
             $table->boolean('rc_benefits')->nullable();
             $table->boolean('last_employed')->nullable();
             $table->text('email')->nullable();

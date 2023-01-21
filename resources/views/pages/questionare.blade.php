@@ -1,7 +1,12 @@
 @extends('layouts.app')
 @section('content')
 {{-- {{ dd($s_1,$s_2,$s_3,$s_4,$s_5,$transaction_id) }} --}}
-
+<style>
+    a.disabled {
+  pointer-events: none;
+  cursor: default;
+   }
+</style>
 <div class="container">
     <div class="quiz-inr-box" >
         <div class="box-header">
@@ -59,16 +64,16 @@
                     <div class="clearall"></div>
                     <div class="fld-box">
                         <div class="frmfield fl mm-fld">
-                            <input type="tel" class="input-fld" name="bd_month" value="{{ old('bd_month') }}" placeholder="MM" maxlength="2" onkeyup="monthSelect(this.value)">
+                            <input type="tel" id="bd_month" class="input-fld" name="bd_month" value="{{ old('bd_month') }}" placeholder="MM" min="1" max="12" maxlength="2">
                         </div>
                         <div class="frmfield fl day-fld">
-                            <input type="tel" class="input-fld" name="bd_day" value="{{ old('bd_day') }}" placeholder="DD" maxlength="2" onkeyup="daySelect(this.value)">
+                            <input type="tel" id ="bd_day"class="input-fld" name="bd_day" value="{{ old('bd_day') }}" placeholder="DD" min="1" max="31" maxlength="2" >
                         </div>
                         <div class="frmfield fl yr-fld">
-                            <input type="tel" class="input-fld" name="bd_year"  value="{{ old('bd_year') }}"  placeholder="YYYY" maxlength="4" onkeyup="yearSelect(this.value)">
+                            <input type="tel" id="bd_year" class="input-fld" name="bd_year"  value="{{ old('bd_year') }}"  placeholder="YYYY" min="1900"  max = "4000" maxlength="4" >
                         </div>
                         <div class="clearall"></div>
-                        <a href="javascript:void(0);" class="continue-btn next-btn">Continue</a>
+                        <a href="javascript:void(0);"  class="continue-btn next-btn bd_div">Continue</a>
                     </div>
                     {{-- <p class="skip-text"><span class="next-btn">Skip</span></p> --}}
                     <p class="call-text">Or Call: <a href="tel:(844) 123-4567">(844) 123-4567</a></p>
@@ -147,7 +152,7 @@
                     
                     <div class="fld-box">
                         <div class="frmfield fl">
-                            <input type="email" class="input-fld" name="email"  pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-zA-Z]{2,4}" value="{{ old('email') }}" id="email" placeholder="Email" required>
+                            <input type="email" class="input-fld" name="email"  value="{{ old('email') }}" id="email" placeholder="Email" required>
                         </div>
                         <div class="clearall"></div>
                         <a href="javascript:void(0);" class="continue-btn next-btn email_div">Continue</a>
@@ -355,7 +360,7 @@ window.initAutocomplete = initAutocomplete;
             var item = $(this);	
             setTimeout(function(){
                 
-                var val=$(item).closest('.question-Box').find(":input").val();
+                var val=$(item).closest('.question-Box').find(":input");
                 
                 // if ($(item).hasClass('go-step6')){
                 //     $(item).closest('.question-Box').hide();
@@ -382,9 +387,30 @@ window.initAutocomplete = initAutocomplete;
                                 $(item).closest('.question-Box').next('.question-Box').show();
                             }
                             else{
-                                alert("Fill the field with correct Email");
+                                
+                                $('.continue-btn').prop('disabled', true);
+                                $('.continue-btn').css( "background-color", "gray" );
                             }
                             }
+                         if($(item).hasClass('bd_div')){
+                            var input =$(item).siblings().find('input[type="tel"]');
+                            // for($i = 0 ; $i <=input.length ; $i++){
+                            //         console.log($(input[$i]).val());
+                            //     }
+                            let $month  = $(input[0]).val();
+                            let $day = $(input[1]).val();
+                            let $year = $(input[2]).val(); 
+                            if(($month <= 12 && $month >= 1) && ($year >= 1900) && ($day <= 31 && $day >= 1)){
+                                $('.continue-btn').prop('enabled', true);
+                                $(item).closest('.question-Box').hide();
+
+                                $(item).closest('.question-Box').next('.question-Box').show();
+                            }
+                            else{
+                                $('.continue-btn').prop('disabled', true);
+                                $('.continue-btn').css( "background-color", "gray" );
+                            }
+                         }   
                         else{
                             $(item).closest('.question-Box').hide();
 
@@ -394,7 +420,9 @@ window.initAutocomplete = initAutocomplete;
                         }
 
                      else{
-                        alert("fill the field");
+                        $('.continue-btn').prop('disabled', true);
+                        $('.continue-btn').css( "border", "2px solid red" );
+
                      }
                     
                 // }
@@ -444,26 +472,59 @@ window.initAutocomplete = initAutocomplete;
     function hasWhiteSpace(s) {
             return /\s/g.test(s);
     }
-    function monthSelect(val){
+    // function bd_validation(){
         
-        let month = val;
-        if(month > 12){
-            alert("Select Valid Month for Birth Date");
-        }
-    }
-    function daySelect(val){
-        let day = val;
-        if(day > 31 ){
-            alert("Select Valid Day for Birth Date");
-        }
-    }
-    function yearSelect(val){
-        let year = val;
-        if(year < 1900)
-        {
-            alert("Select Valid Year for Birth Date");
-        }
-    }
+    //     $month = $('#bd_month').val();
+    //     $year = $('#bd_year').val();
+    //     $day = $('#bd_day').val();
+    //     // if( ($month < 12 || $month > 1) && ($year > 1900  || $year != 1) && ($day < 31 || $day > 1  )){
+
+    //     if( ($month <= 12 && $month >= 1) && ($year >= 1900) && ($day <= 31 && $day >= 1  )){
+    //         $('.continue-btn').prop('enabled', true);
+    //         $('.continue-btn').css( "background-color", "green" )
+    //     }
+    //     else{
+            
+    //         $('#bd_btn').prop('disabled', true);
+    //     }
+    // }
+    // function monthSelect(val){
+    //     var item  = $(this);
+    //     let month = val;
+    //     if(month > 12){
+    //         $(item).css("border","2px solid red");
+            
+    //         $('.continue-btn').css( "border", "2px solid red" );
+    //     }
+    //     else{
+    //         $('.continue-btn').prop('enabled', true);
+    //     }
+    // }
+    // function daySelect(val){
+    //     let day = val;
+    //     if(day > 31 ){
+    //         $(item).css("border","2px solid red");
+    //         $('.continue-btn').prop('disabled', true);
+    //         $('.continue-btn').css( "border", "2px solid red" );
+
+    //     }
+    //     else{
+    //         $('.continue-btn').prop('enabled', true);
+    //     }
+    // }
+    // function yearSelect(val){
+    //     let year = val;
+    //     if(year < 1900)
+    //     {
+    //         $(item).css("border","2px solid red");
+    //         $('.continue-btn').prop('disabled', true);
+    //         $('.continue-btn').css( "border", "2px solid red" );
+
+    //     }
+    //     else{
+    //         $('.continue-btn').prop('enabled', true);
+    //     }
+    // }
     </script>
 
     

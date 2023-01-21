@@ -4,7 +4,7 @@
 @yield('styles')
 <body>
 
-@include('layouts.header');
+@include('layouts.header')
 
 <div class="top-strip">
 	<div class="container">

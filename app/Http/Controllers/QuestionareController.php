@@ -14,11 +14,23 @@ class QuestionareController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($s_1 = null , $transaction_id = null , $s_2 = null ,$s_3 = null ,$s_4 = null ,$s_5 = null)
+    public function index(Request $request)
     {
         //dd($s_1,$s_2,$s_3,$s_4,$s_5,$transaction_id);
-            
-            return view('pages.questionare',['s_1' => $s_1,'s_2' => $s_2 ,'s_3' => $s_3 , 's_4' => $s_4 , 's_5' => $s_5 , 'transaction_id'=>$transaction_id]);
+             //   dd($request);
+             $s1 = $request->query('s1');
+
+             // returns "Bar"
+             $s2 = $request->query('s2');
+             $s3 = $request->query('s3');
+
+             // returns "Bar"
+             $s4 = $request->query('s4');
+             $s5 = $request->query('s5');
+
+             // returns "Bar"
+             $transaction_id = $request->query('transaction_id');
+            return view('pages.questionare1',['s_1' => $s1,'s_2' => $s2,'s_3' => $s3 ,'s_4' => $s4,'s_5' => $s5,'transaction_id' => $transaction_id]  );
        
     }
 
@@ -42,18 +54,26 @@ class QuestionareController extends Controller
     {
         
         //
-        
-        
-        $validator = Validator::make($request->all(), [
+        $dataReq = $request->all();
+        if(preg_match('/\s/',$dataReq['first_name'])){
+            $name = explode(' ',$dataReq['first_name']);
+            $first_name = $name[0];
+            $last_name = $name[1];
+            //$request->merge(['last_name' => $last_name]);
+            $dataReq['first_name'] = $first_name;
+            $dataReq['last_name'] = $last_name;
+        }
+         
+        $validator = Validator::make($dataReq, [
             'bd_month' => 'nullable|numeric',
             'bd_day' => 'nullable|numeric',
             'bd_year' => 'nullable|numeric',
-            'zip_code' => 'nullable|numeric',
+            'zip_code' => 'nullable|string',
             'email' => 'required|email',
             'phone' => 'string|required',
             'med_care' => 'boolean',
             'first_name' => 'required|string',
-            'last_name' => 'required|string',
+            'last_name' => 'string|nullable',
             'address' => 'string|max:255|min:7',
             's_1' => 'numeric|nullable',
             's_2' => 'numeric|nullable',
@@ -80,11 +100,11 @@ class QuestionareController extends Controller
         
         $data  = $validator->validated();
         
-        $data['s1_id'] = isset($data['s_1']) ? $data['s_1'] : rand(100,1000);
-        $data['s2_id'] =  isset($data['s_2']) ? $data['s_2'] : rand(100,1000);
-        $data['s3_id'] = isset($data['s_3']) ? $data['s_3'] : rand(100,1000);
-        $data['s4_id'] = isset($data['s_4']) ? $data['s_4'] : rand(100,1000);
-        $data['s5_id'] = isset($data['s_5']) ? $data['s_5'] : rand(100,1000);
+        $data['s1_id'] = isset($data['s1_id']) ? $data['s1_id'] : rand(100,1000);
+        $data['s2_id'] =  isset($data['s2_id']) ? $data['s2_id'] : rand(100,1000);
+        $data['s3_id'] = isset($data['s3_id']) ? $data['s3_id'] : rand(100,1000);
+        $data['s4_id'] = isset($data['s4_id']) ? $data['s4_id'] : rand(100,1000);
+        $data['s5_id'] = isset($data['s5_id']) ? $data['s5_id'] : rand(100,1000);
         $year = $data['bd_year'];
         $month = $data['bd_month'];
         $day = $data['bd_year'];
@@ -93,7 +113,7 @@ class QuestionareController extends Controller
             "lp_campaign_id"=>"63c5b332bc6d5",
             "lp_campaign_key"=>"GjBQW24PRgprmYXJDdVM",
             "first_name" => $data['first_name'],
-            "last_name" => $data['last_name'],
+            "last_name" => isset($data['last_name']) ?? null,
             "ip_response" => "json",
             "dob" => $dob,
             "address" => $data['address'],

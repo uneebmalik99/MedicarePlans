@@ -14,5 +14,6 @@ use App\Http\Controllers\QuestionareController;
 |
 */
 
-Route::get('/{transaction_id?}/{s1?}/{s2?}/{s3?}/{s4?}/{s5?}',[QuestionareController::class,'index']);
+Route::get('/',[QuestionareController::class,'index']);
 Route::post('/questionare/save',[QuestionareController::class,'store'])->name('questionare.save');
+//transaction_id s1 s2 s3 s4 s5
