@@ -1,12 +1,32 @@
 @extends('layouts.app')
 @section('content')
     {{-- {{ dd($s_1,$s_2,$s_3,$s_4,$s_5,$transaction_id) }} --}}
-<style>
-    a.disabled {
-        pointer-events: none;
-        cursor: default;
+    <style>
+        a.disabled {
+            pointer-events: none;
+            cursor: default;
         }
-</style>
+
+        .style_date,.style_address ,.style_name,.style_email,.style_phone{
+            margin-top: 3px;
+            margin-bottom: 5px;
+            color: red;
+            font-size: 10px;
+            font-weight: 400;
+        }
+
+        #valid_month,#valid_address,#valid_zip_code,#valid_name,#valid_email,#valid_phone{
+            display: none;
+        }
+
+        #valid_year {
+            display: none;
+        }
+
+        #valid_day {
+            display: none;
+        }
+    </style>
     <div class="container">
         <div class="quiz-inr-box">
             <div class="box-header">
@@ -34,6 +54,7 @@
                     <input type="hidden" name="s4_id" value="{{ @$s_4 }}" id="">
                     <input type="hidden" name="s5_id" value="{{ @$s_5 }}" id="">
                     <input type="hidden" name="transaction_id" value="{{ @$transaction_id }}" id="">
+                    <input type="hidden" name="aff_id" value="{{ @$aff_id }}" id="">
                     {{-- @method('post') --}}
                     <div class="question-Box" data-wdth="5" style="">
                         <div class="step-inrBox">
@@ -66,19 +87,35 @@
                             <div class="clearall"></div>
                             <div class="fld-box">
                                 <div class="frmfield fl mm-fld">
-                                    <input type="tel" class="input-fld" id="bd_month" name="bd_month" value="{{ old('bd_month') }}"
-                                        placeholder="MM" maxlength="2" onkeyup="bd_validate()">
+                                    <input type="tel" min="1" class="input-fld" id="bd_month" name="bd_month"
+                                        value="{{ old('bd_month') }}" placeholder="MM" maxlength="2"
+                                        onkeyup="bd_validate()">
+                                    <div id="valid_month" style="margin-top:66px !important;">
+
+                                        <p class="style_date">Enter Valid Month</p>
+                                    </div>
                                 </div>
                                 <div class="frmfield fl day-fld">
-                                    <input type="tel" class="input-fld" id="bd_day" name="bd_day" value="{{ old('bd_day') }}"
-                                        placeholder="DD" maxlength="2" onkeyup="bd_validate()">
+                                    <input type="tel" min="1" class="input-fld" id="bd_day" name="bd_day"
+                                        value="{{ old('bd_day') }}" placeholder="DD" maxlength="2"
+                                        onkeyup="bd_validate()">
+                                    <div id="valid_day" style="margin-top:66px !important;">
+                                        <p class="style_date">Enter Valid Day</p>
+                                    </div>
+
                                 </div>
                                 <div class="frmfield fl yr-fld">
-                                    <input type="tel" class="input-fld" id="bd_year" name="bd_year" value="{{ old('bd_year') }}"
-                                        placeholder="YYYY" maxlength="4" onkeyup="bd_validate()">
+                                    <input type="tel" min="1" class="input-fld" id="bd_year" name="bd_year"
+                                        value="{{ old('bd_year') }}" placeholder="YYYY" maxlength="4"
+                                        onkeyup="bd_validate()">
+                                    <div id="valid_year"style="margin-top:66px !important;">
+                                        <p class="style_date">Enter Valid Year</p>
+                                    </div>
+
                                 </div>
                                 <div class="clearall"></div>
-                                <a href="javascript:void(0);" class="continue-btn next-btn" id="bd_div">Continue</a>
+                                <a href="javascript:void(0);" class="continue-btn next-btn birthday"
+                                    style="margin-top:28px!important;" id="bd_div">Continue</a>
                             </div>
                             {{-- <p class="skip-text"><span class="next-btn">Skip</span></p> --}}
                             <p class="call-text">Or Call: <a href="tel:(844) 123-4567">(844) 123-4567</a></p>
@@ -98,24 +135,39 @@
                                     <input type="tel" id="autocomplete" name="address" class="input-fld"
                                         value="{{ old('address') }}" placeholder="Enter Address" autocomplete="off"
                                         onkeyup="validate_address()">
+                                    <div style="margin-top:58px !important;">
+                                        <p class="style_address valid" id="valid_address">Enter Valid Address</p>
+                                    </div>
                                 </div>
                                 <div class="step-inrBox" id="map"></div>
                                 <div class="frmfield fl">
                                     <input type="tel" name="zip_code" id="zip_code" class="input-fld"
                                         value="{{ old('zip_code') }}" placeholder="Enter Zip"
                                         onkeyup="validate_address()">
+                                    <div  style="margin-top:66px !important;">
+                                        <p class="style_address" id="valid_zip_code">Enter Valid ZipCode</p>
+                                    </div>
                                 </div>
+
+                                <input type="hidden" name="country" id="country" class="input-fld"
+                                    value="{{ old('country') }}" placeholder="Enter country">
+
+                                <input type="hidden" name="state" id="state" class="input-fld"
+                                    value="{{ old('state') }}" placeholder="Enter state">
+
+                                <input type="hidden" name="city" id="city" class="input-fld"
+                                    value="{{ old('city') }}" placeholder="Enter city">
+
+
                                 <div class="clearall"></div>
                                 <a href="javascript:void(0);" class="continue-btn next-btn address_zip"
-                                    id="address_validate">Continue</a>
+                                    id="address_validate" style="margin-top: 25px;">Continue</a>
                             </div>
                             <p class="call-text">Or Call: <a href="tel:(844) 123-4567">(844) 123-4567</a></p>
                             <div class="clearall"></div>
                             <p class="btn-back"><img src="{{ asset('images/back-arw.png') }}"><span>Previous</span></p>
                         </div>
                     </div>
-
-
 
                     {{-- <div class="question-Box" style="display:none;" data-wdth="60">
                 <div class="step-inrBox">
@@ -146,31 +198,33 @@
                                     <input type="text" class="input-fld" name="first_name" id="first_name"
                                         value="{{ old('first_name') }}" placeholder="First Name"
                                         onkeyup="spaceCheck(this.val)" required>
+                                        <div  style="margin-top:66px !important;">
+                                            <p class="style_name" id="valid_name">Enter Valid Name</p>
+                                        </div>
                                 </div>
-                                
-
                                 <div class="clearall"></div>
-                                <a href="javascript:void(0);" class="continue-btn next-btn" id="firstname">Continue</a>
+                                <a href="javascript:void(0);"  style="margin-top: 25px" class="continue-btn next-btn firstname" id="firstname">Continue</a>
                             </div>
                             <p class="call-text">Or Call: <a href="tel:(844) 123-4567">(844) 123-4567</a></p>
                             <div class="clearall"></div>
                             <p class="btn-back"><img src="{{ asset('images/back-arw.png') }}"><span>Previous</span></p>
                         </div>
                     </div>
-
                     <div class="question-Box" style="display:none;" data-wdth="85">
                         <div class="step-inrBox">
                             <p class="step-hdng">What is your email?</p>
-
                             <div class="fld-box">
                                 <div class="frmfield fl">
                                     <input type="email" class="input-fld" name="email"
                                         pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-zA-Z]{2,4}"
                                         value="{{ old('email') }}" id="email" placeholder="Email" required
                                         onkeyup="validateEmail(this.value)">
+                                        <div  style="margin-top:66px !important;">
+                                            <p class="style_email" id="valid_email">Enter Valid Email</p>
+                                        </div>
                                 </div>
                                 <div class="clearall"></div>
-                                <a href="javascript:void(0);" class="continue-btn next-btn"
+                                <a href="javascript:void(0);" class="continue-btn next-btn email_div"
                                     id="validate_email">Continue</a>
                             </div>
                             {{-- <p class="skip-text"><span class="next-btn">Skip</span></p> --}}
@@ -188,18 +242,23 @@
                             <div class="fld-box">
                                 <div class="frmfield fl">
                                     <input class="input-fld" placeholder="Phone" value="{{ old('phone') }}"
-                                        name="phone" type="tel" value="" id="phone" onkeyup="validatePhone(this.value)">
+                                        name="phone" type="tel" id="phone" onkeyup="validatePhone(this.value)"
+                                        required>
+                                        <div  style="margin-top:66px !important;">
+                                            <p class="style_phone" id="valid_phone">Enter Valid Phone</p>
+                                        </div>
                                 </div>
 
-                                <p class="clk-terms">By clicking the View My Results Button, I agree to the consents below
+                                <p class="clk-terms" style="margin-top:20px!important;">By clicking the View My Results Button, I agree to the consents below
                                     the button.</p>
 
 
-                                <div class="clearall" ></div>
-                                <button class="continue-btn" id="results" type='submit'
+                                <div class="clearall"></div>
+                                <button class="continue-btn" id="results" type='button'
                                     style="border: none!important;
-                        outline: none!important;">
-                                    <a href="javascript:void(0);" >View My Results</a>
+                        outline: none!important;"
+                                    onclick="validate_phone()">
+                                    <a href="javascript:void(0);" class="phone">View My Results</a>
                                 </button>
                                 <p class="btn-back"><img src="{{ asset('images/back-arw.png') }}"><span>Previous</span>
                                 </p>
@@ -376,25 +435,40 @@ window.initAutocomplete = initAutocomplete;
                 geocoder.geocode({
                     'latLng': latlng
                 }, function(results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {
+                    if (status == google.maps.GeocoderStatus.OK) {  
                         if (results[0]) {
-                            // var address = results[0].address_components;
-                            // var zipcode = address[address.length - 1].long_name;
-                            // console.log(JSON.stringify(address));
+
                             for (j = 0; j < results[0].address_components.length; j++) {
-                                if (results[0].address_components[j].types[0] == 'postal_code')
+                                if (results[0].address_components[j].types[0] == 'postal_code') {
                                     $('#zip_code').val(results[0].address_components[j].short_name);
+                                }
+                                if (results[0].address_components[j].types[0] == 'country') {
+                                    $('#country').val(results[0].address_components[j].long_name);
+                                }
+
+                                if (results[0].address_components[j].types[0] ==
+                                    'administrative_area_level_1') {
+                                    $('#state').val(results[0].address_components[j].long_name);
+                                }
+
+                                if (results[0].address_components[j].types[0] == 'locality') {
+                                    $('#city').val(results[0].address_components[j].long_name);
+                                }
                                 // alert("Zip Code: " + results[0].address_components[j].short_name);
                             }
-
                             zip = $('#zip_code').val();
-
                             if (zip != '') {
                                 $('#address_validate').css('background-color', 'green');
                                 $('#address_validate').addClass('next-btn');
+
+                                $('#valid_zip_code').css('display', 'none');
+                                $('#zip_code').css('border', '1px solid grey');
+
                             }
-
-
+                            else{
+                                $('#valid_zip_code').css('display', 'block');
+                                $('#zip_code').css('border', '1px solid red');
+                            }
                         }
                     } else {
                         alert("Geocoder failed due to: " + status);
@@ -409,30 +483,111 @@ window.initAutocomplete = initAutocomplete;
         $(document).ready(function() {
 
             $('.continue-btn').css('background-color', 'grey');
+            // $('.next-btn').click(function(e) {
+            //     var item = $(this);
+            //     setTimeout(function() {
+            //         var val = $(item).closest('.question-Box').find(":input").val();
 
-
+            //         if (val != "") {
+            //                 $(item).closest('.question-Box').hide();
+            //                 $(item).closest('.question-Box').next('.question-Box').show();
+            //         } else {
+            //             $(item).css('background-color', 'grey');
+            //             $(item).removeClass('next-btn');
+            //             $(item).addClass('disabled');
+            //         }
+            //         // }
+            //         progress();
+            //     }, 300);
+            // });
             $('.next-btn').click(function(e) {
+                // alert('kashif');
                 var item = $(this);
                 setTimeout(function() {
                     var val = $(item).closest('.question-Box').find(":input").val();
-                    
+                    var zip = $('#zip_code').val();
+                    var month = $('#bd_month').val();
+                    var year = $('#bd_year').val();
+                    var day = $('#bd_day').val();
                     if (val != "") {
+                        if ($(item).hasClass('email_div')) {
+                            if (/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/.test(val)) {
+                                $(item).closest('.question-Box').hide();
+                                $(item).closest('.question-Box').next('.question-Box').show();
+                            } else {
+                                alert("Fill the field with correct Email");
+                            }
+                        } else if ($(item).hasClass('address_zip')) {
+                            if (val != '' && zip != '') {
+                                $(item).closest('.question-Box').hide();
+                                $(item).closest('.question-Box').next('.question-Box').show();
+                            } else {
+                                alert('Please Enter Zip Code');
+                            }
+                        } else if ($(item).hasClass('birthday')) {
+                            if ((month <= 12 && month >= 1) && (year >= 1900 && year < 2006) && (
+                                    day <= 31 && day >= 1)) {
+                                // alert('if');
+                                $(item).closest('.question-Box').hide();
+                                $(item).closest('.question-Box').next('.question-Box').show();
+                            } else {
+                                // alert('kashif');
+                                // alert('Please enter valid birth date');
+                            }
+                        } else if ($(item).hasClass('phone')) {
+                            // alert('phone');
+                            if (val == '') {
+                                alert('Please Enter Valid Phone Number');
+                            }
 
-
+                        } else {
                             $(item).closest('.question-Box').hide();
                             $(item).closest('.question-Box').next('.question-Box').show();
-                           
-                       
+                        }
                     } else {
-                        $(item).css('background-color', 'grey');
-                        $(item).removeClass('next-btn');
-                        $(item).addClass('disabled');
+                        if($(item).hasClass('birthday')){
+                            $('#valid_month').css('display', 'block');
+                            $('#valid_day').css('display', 'block');
+                            $('#valid_year').css('display', 'block');
+
+                            $('#bd_month').css('border', '1px solid red');
+                            $('#bd_day').css('border', '1px solid red');
+                            $('#bd_year').css('border', '1px solid red');
+
+                        }
+                        else if($(item).hasClass('address_zip')){
+                            
+                            $('#valid_address').css('display', 'block');
+                            $('#valid_zip_code').css('display', 'block');
+                            $('#zip_code').css('border', '1px solid red');
+                            $('#autocomplete').css('border', '1px solid red');
+
+                        }
+                        else if($(item).hasClass('firstname')){
+                            
+                            $('#valid_name').css('display', 'block');
+                            
+                            $('#first_name').css('border', '1px solid red');
+                            
+
+                        }
+                        else if($(item).hasClass('email_div')){
+                            
+                            $('#valid_email').css('display', 'block');
+                            
+                            $('#email').css('border', '1px solid red');
+                            
+
+                        }
+                        else{
+
+                            alert("fill the field");
+                        }
                     }
                     // }
                     progress();
                 }, 300);
             });
-
             $('.btn-back').click(function(e) {
                 var item = $(this);
                 setTimeout(function() {
@@ -459,20 +614,32 @@ window.initAutocomplete = initAutocomplete;
                 $('#firstname').removeClass('disabled');
                 $('#firstname').css('background-color', 'green');
                 $('#firstname').addClass('next-btn');
+                $('#valid_name').css('display', 'none');
+                            
+                $('#first_name').css('border', '1px solid grey');
             } else {
                 $('#firstname').addClass('disabled');
                 $('#firstname').css('background-color', 'grey');
                 $('#firstname').removeClass('next-btn');
+                $('#valid_name').css('display', 'block');
+                            
+                $('#first_name').css('border', '1px solid red');
             }
         }
 
         function validateEmail(val) {
             if (/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/.test(val)) {
-                $('#validate_email').removeClass('disabled');
+                // $('#validate_email').removeClass('disabled');
+                $('#valid_email').css('display', 'none');
+                            
+                $('#email').css('border', '1px solid grey');
                 $('#validate_email').css('background-color', 'green');
                 $('#validate_email').addClass('next-btn');
             } else {
-                $('#validate_email').addClass('disabled');
+                // $('#validate_email').addClass('disabled');
+                $('#valid_email').css('display', 'block');
+                            
+                $('#email').css('border', '1px solid red');
                 $('#validate_email').css('background-color', 'grey');
                 $('#validate_email').removeClass('next-btn');
             }
@@ -480,58 +647,122 @@ window.initAutocomplete = initAutocomplete;
 
 
         function validate_address() {
-
             address = $('#autocomplete').val();
             zipcode = $('#zip_code').val();
-            if (address.isEmpty() || zipcode.isEmpty()) {
-                
-                
-                    $('#address_validate').removeClass('disabled');
-                    $('#address_validate').css('background-color', 'green');
-                    $('#address_validate').addClass('next-btn');
-                
+            if (address != '' && zipcode != '') {
+                // $('#address_validate').removeClass('disabled');
+                $('#address_validate').css('background-color', 'green');
+                $('#address_validate').addClass('next-btn');
+
             } else {
-                
-                $('#address_validate').addClass('disabled');
+                // $('#address_validate').addClass('disabled');
                 $('#address_validate').css('background-color', 'grey');
                 $('#address_validate').removeClass('next-btn');
             }
+            if(address != ''){
+                $('#valid_address').css('display', 'none');
+                $('#autocomplete').css('border', '1px solid grey');
+            }
+            else{
+                $('#valid_address').css('display', 'block');
+                $('#autocomplete').css('border', '1px solid red');
+            }
+            if(zipcode != ''){
+                $('#valid_zip_code').css('display', 'none');
+                $('#zip_code').css('border', '1px solid grey');
+            }
+            else{
+                $('#valid_zip_code').css('display', 'block');
+                $('#zip_code').css('border', '1px solid red');
+            }
         }
 
-        
-        function bd_validate(){
-        
-        $month = $('#bd_month').val();
-        $year = $('#bd_year').val();
-        $day = $('#bd_day').val();
-        // if( ($month < 12 || $month > 1) && ($year > 1900  || $year != 1) && ($day < 31 || $day > 1  )){
 
-        if( ($month <= 12 && $month >= 1) && ($year >= 1900) && ($day <= 31 && $day >= 1  )){
-            $('#bd_div').removeClass('disabled');
-            $('#bd_div').css('background-color', 'green');
-            $('#bd_div').addClass('next-btn');
+        function bd_validate() {
+
+            $month = $('#bd_month').val();
+            $year = $('#bd_year').val();
+            $day = $('#bd_day').val();
+            // if( ($month < 12 || $month > 1) && ($year > 1900  || $year != 1) && ($day < 31 || $day > 1  )){
+
+            if (($month <= 12 && $month >= 1) && ($year >= 1900 && $year < 2006) && ($day <= 31 && $day >= 1)) {
+
+                $('#bd_div').css('background-color', 'green');
+                $('#bd_div').addClass('next-btn');
+            } else {
+                // alert('Please select correct birth date');
+                $('#bd_div').css('background-color', 'grey');
+                $('#bd_div').removeClass('next-btn');
+            }
+
+            if ($month <= 12 && $month >= 1) {
+                $('#valid_month').css('display', 'none');
+                $('#bd_month').css('border', '1px solid grey');
+            } else {
+                $('#valid_month').css('display', 'block');
+                $('#bd_month').css('border', '1px solid red');
+            }
+            //Valid Month
+            if ($year >= 1900 && $year < 2006) {
+                $('#valid_year').css('display', 'none');
+                $('#bd_year').css('border', '1px solid grey');
+            } else {
+                $('#valid_year').css('display', 'block');
+                $('#bd_year').css('border', '1px solid red');
+            }
+            //Valid Day
+            if ($day <= 31 && $day >= 1) {
+                $('#valid_day').css('display', 'none');
+                $('#bd_day').css('border', '1px solid grey');
+            } else {
+                $('#valid_day').css('display', 'block');
+                $('#bd_day').css('border', '1px solid red');
+            }
+
+            if ($day == '') {
+                $('#valid_day').css('display', 'none');
+                $('#bd_day').css('border', '1px solid grey');
+            }
+            if ($month == '') {
+                $('#valid_month').css('display', 'none');
+                $('#bd_month').css('border', '1px solid grey');
+            }
+            if ($year == '') {
+                $('#valid_year').css('display', 'none');
+                $('#bd_year').css('border', '1px solid grey');
+            }
+
         }
-        else{
-            $('#bd_div').css('background-color', 'grey');
-            $('#bd_div').removeClass('next-btn');
-            $('#bd_div').addClass('disabled');
+
+        function validatePhone(val) {
+            console.log(val);
+            if (/^\([0-9]{3}\) [0-9]{3}\-[0-9]{4}$/.test(val)) {
+                $('#results').css('background-color', 'green');
+                $('#results').attr('type', 'submit');
+
+                $('#valid_phone').css('display', 'none');
+                $('#phone').css('border', '1px solid grey');
+
+            } else {
+                $('#results').attr('type', 'button');
+                $('#results').css('background-color', 'grey');
+                $('#valid_phone').css('display', 'block');
+                $('#phone').css('border', '1px solid red');
+            }
+
             
-            
         }
-    }
-     function validatePhone(val){
-        if(val == ' '){
-            $('#results').css('background-color', 'grey');
-            $('#results').removeClass('continue-btn');
-            $('#results').addClass('disabled');
+
+        function validate_phone() {
+            // val = $('#phone').val();
+            type = $('#results').attr('type');
+            // alert(type);
+            if (type == 'button') {
+                $('#valid_phone').css('display', 'block');
+                $('#phone').css('border', '1px solid red');
+                
+            }
         }
-        else{
-            $('#results').removeClass('disabled');
-            $('#results').css('background-color', 'green');
-            $('#results').addClass('continue-btn');
-            
-        }
-     }
         // function monthSelect(val){
 
         //     let month = val;

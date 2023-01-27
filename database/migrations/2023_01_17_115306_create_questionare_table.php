@@ -23,6 +23,16 @@ return new class extends Migration
             $table->mediumText('zip_code')->nullable();
             $table->boolean('rc_benefits')->nullable();
             $table->boolean('last_employed')->nullable();
+            /**
+            *     'country' => 'nullable|string',
+            *'state' => 'nullable|string',
+            *'city' => 'nullable|string',
+            *aff_id
+            */
+            $table->text('country')->nullable();
+            $table->text('state')->nullable();
+            $table->text('city')->nullable();
+
             $table->text('email')->nullable();
             $table->text('phone')->nullable();
             $table->text('first_name')->nullable();
@@ -34,6 +44,8 @@ return new class extends Migration
             $table->integer('s4_id')->nullable();
             $table->integer('s5_id')->nullable();
             $table->integer('transaction_id')->nullable();
+            $table->integer('aff_id')->nullable();
+
             $table->timestamps();
         });
     }
