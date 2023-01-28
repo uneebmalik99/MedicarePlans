@@ -7,7 +7,11 @@
             cursor: default;
         }
 
-        .style_date,.style_address ,.style_name,.style_email,.style_phone{
+        .style_date,
+        .style_address,
+        .style_name,
+        .style_email,
+        .style_phone {
             margin-top: 3px;
             margin-bottom: 5px;
             color: red;
@@ -15,7 +19,12 @@
             font-weight: 400;
         }
 
-        #valid_month,#valid_address,#valid_zip_code,#valid_name,#valid_email,#valid_phone{
+        #valid_month,
+        #valid_address,
+        #valid_zip_code,
+        #valid_name,
+        #valid_email,
+        #valid_phone {
             display: none;
         }
 
@@ -70,7 +79,6 @@
                                     <p class="desc-opt"><img src="{{ asset('images/cross.png') }}"> No</p>
                                 </label>
                             </div>
-
                             {{-- <p class="skip-text"><span class="next-btn">Skip</span></p> --}}
                             <p class="call-text">Or Call: <a href="tel:(844) 123-4567">(844) 123-4567</a></p>
                         </div>
@@ -144,7 +152,7 @@
                                     <input type="tel" name="zip_code" id="zip_code" class="input-fld"
                                         value="{{ old('zip_code') }}" placeholder="Enter Zip"
                                         onkeyup="validate_address()">
-                                    <div  style="margin-top:66px !important;">
+                                    <div style="margin-top:66px !important;">
                                         <p class="style_address" id="valid_zip_code">Enter Valid ZipCode</p>
                                     </div>
                                 </div>
@@ -198,12 +206,13 @@
                                     <input type="text" class="input-fld" name="first_name" id="first_name"
                                         value="{{ old('first_name') }}" placeholder="First Name"
                                         onkeyup="spaceCheck(this.val)" required>
-                                        <div  style="margin-top:66px !important;">
-                                            <p class="style_name" id="valid_name">Enter Valid Name</p>
-                                        </div>
+                                    <div style="margin-top:66px !important;">
+                                        <p class="style_name" id="valid_name">Enter Valid Name</p>
+                                    </div>
                                 </div>
                                 <div class="clearall"></div>
-                                <a href="javascript:void(0);"  style="margin-top: 25px" class="continue-btn next-btn firstname" id="firstname">Continue</a>
+                                <a href="javascript:void(0);" style="margin-top: 25px"
+                                    class="continue-btn next-btn firstname" id="firstname">Continue</a>
                             </div>
                             <p class="call-text">Or Call: <a href="tel:(844) 123-4567">(844) 123-4567</a></p>
                             <div class="clearall"></div>
@@ -219,9 +228,9 @@
                                         pattern="[a-zA-Z0-9._%+-]+@[a-z0-9.-]+\.[a-zA-Z]{2,4}"
                                         value="{{ old('email') }}" id="email" placeholder="Email" required
                                         onkeyup="validateEmail(this.value)">
-                                        <div  style="margin-top:66px !important;">
-                                            <p class="style_email" id="valid_email">Enter Valid Email</p>
-                                        </div>
+                                    <div style="margin-top:66px !important;">
+                                        <p class="style_email" id="valid_email">Enter Valid Email</p>
+                                    </div>
                                 </div>
                                 <div class="clearall"></div>
                                 <a href="javascript:void(0);" class="continue-btn next-btn email_div"
@@ -244,26 +253,31 @@
                                     <input class="input-fld" placeholder="Phone" value="{{ old('phone') }}"
                                         name="phone" type="tel" id="phone" onkeyup="validatePhone(this.value)"
                                         required>
-                                        <div  style="margin-top:66px !important;">
-                                            <p class="style_phone" id="valid_phone">Enter Valid Phone</p>
-                                        </div>
+                                    <div style="margin-top:60px !important;">
+                                        <p class="style_phone" id="valid_phone">Enter Valid Phone</p>
+                                        <br>
+                                        <p></p>
+                                    </div>
                                 </div>
-                    
+
+                                
 
 
                                 <div class="clearall"></div>
-                                <button class="continue-btn" id="results" type='button' cursor='help'
+                                <a href="javascript:void(0);" class="phone">
+                                <button class="continue-btn" id="results" type='button'
                                     style="border: none!important;
                         outline: none!important;"
                                     onclick="validate_phone()">
-                                    <a href="javascript:void(0);" style="width: 100%">View My Results</a>
+                                    View My Results
                                 </button>
+                            </a>
                                 <p class="btn-back"><img src="{{ asset('images/back-arw.png') }}"><span>Previous</span>
                                 </p>
 
                             </div>
-                            
-                            <p class="btm-terms"><strong>Consent to Be Contacted</strong>. I agree to be contacted by
+
+                            <p class="btm-terms" style="margin-top:30px!important"><strong>Consent to Be Contacted</strong>. I agree to be contacted by
                                 select insurance carriers and financial institutions listed <a href="#">here</a>,
                                 their agents, individual insurance agents, and/or Assurance for marketing purposes
                                 concerning insurance and/or other financial products by phone/text at my number provided
@@ -271,9 +285,12 @@
                                 number is on a do not call list, or by email at the email address I have provided. Texts
                                 about these offers may be sent from Assurance’s Shopper Alerts number, 71953 (message & data
                                 rates may apply). Consent is not required to make a purchase and I can opt out any time.</p>
-                            
-                            <p class="btm-terms" style="margin-top:20px!important;">By clicking the View My Results Button, I agree to the consents below
+
+                                <p class="clk-terms" style="margin-top:20px!important;display:flex;">By clicking the View My Results
+                                    Button, I agree to the consents below
                                     the button.</p>
+
+
                             <p class="btm-terms"><strong>Consent to Share Information.</strong> I agree to Assurance
                                 sharing my information with Prudential companies and affiliates so that they can market
                                 their products and services to me, and to Assurance sharing my information with third-party
@@ -416,6 +433,7 @@ window.initAutocomplete = initAutocomplete;
     <script type="text/javascript"
         src="https://maps.google.com/maps/api/js?key=AIzaSyAH0hKto_ytpHs2vLnVnngnSbAPWtbumCE&libraries=places&callback=initMap">
     </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.inputmask/3.1.62/jquery.inputmask.bundle.js"></script>
     <script>
         google.maps.event.addDomListener(window, 'load', initialize);
 
@@ -435,7 +453,7 @@ window.initAutocomplete = initAutocomplete;
                 geocoder.geocode({
                     'latLng': latlng
                 }, function(results, status) {
-                    if (status == google.maps.GeocoderStatus.OK) {  
+                    if (status == google.maps.GeocoderStatus.OK) {
                         if (results[0]) {
 
                             for (j = 0; j < results[0].address_components.length; j++) {
@@ -464,8 +482,7 @@ window.initAutocomplete = initAutocomplete;
                                 $('#valid_zip_code').css('display', 'none');
                                 $('#zip_code').css('border', '1px solid grey');
 
-                            }
-                            else{
+                            } else {
                                 $('#valid_zip_code').css('display', 'block');
                                 $('#zip_code').css('border', '1px solid red');
                             }
@@ -480,23 +497,9 @@ window.initAutocomplete = initAutocomplete;
         }
     </script>
     <script type="text/javascript">
-        
-           
-
-    
         $(document).ready(function() {
-            
+
             $('.continue-btn').css('background-color', 'grey');
-            $('body').on('keyup', '#bd_month',function(){
-                if (this.value.length === parseInt(this.attributes["maxlength"].value)) {
-                    $('#bd_day').focus();
-                }
-                })
-            $('body').on('keyup','#bd_day', function(){
-            if (this.value.length === parseInt(this.attributes["maxlength"].value)) {
-                $('#bd_year').focus();
-            }
-            })
             // $('.next-btn').click(function(e) {
             //     var item = $(this);
             //     setTimeout(function() {
@@ -539,14 +542,14 @@ window.initAutocomplete = initAutocomplete;
                                 alert('Please Enter Zip Code');
                             }
                         } else if ($(item).hasClass('birthday')) {
-                            
                             if ((month <= 12 && month >= 1) && (year >= 1900 && year < 2006) && (
                                     day <= 31 && day >= 1)) {
                                 // alert('if');
                                 $(item).closest('.question-Box').hide();
                                 $(item).closest('.question-Box').next('.question-Box').show();
                             } else {
-                    
+                                // alert('kashif');
+                                // alert('Please enter valid birth date');
                             }
                         } else if ($(item).hasClass('phone')) {
                             // alert('phone');
@@ -559,7 +562,7 @@ window.initAutocomplete = initAutocomplete;
                             $(item).closest('.question-Box').next('.question-Box').show();
                         }
                     } else {
-                        if($(item).hasClass('birthday')){
+                        if ($(item).hasClass('birthday')) {
                             $('#valid_month').css('display', 'block');
                             $('#valid_day').css('display', 'block');
                             $('#valid_year').css('display', 'block');
@@ -568,32 +571,28 @@ window.initAutocomplete = initAutocomplete;
                             $('#bd_day').css('border', '1px solid red');
                             $('#bd_year').css('border', '1px solid red');
 
-                        }
-                        else if($(item).hasClass('address_zip')){
-                            
+                        } else if ($(item).hasClass('address_zip')) {
+
                             $('#valid_address').css('display', 'block');
                             $('#valid_zip_code').css('display', 'block');
                             $('#zip_code').css('border', '1px solid red');
                             $('#autocomplete').css('border', '1px solid red');
 
-                        }
-                        else if($(item).hasClass('firstname')){
-                            
+                        } else if ($(item).hasClass('firstname')) {
+
                             $('#valid_name').css('display', 'block');
-                            
+
                             $('#first_name').css('border', '1px solid red');
-                            
 
-                        }
-                        else if($(item).hasClass('email_div')){
-                            
+
+                        } else if ($(item).hasClass('email_div')) {
+
                             $('#valid_email').css('display', 'block');
-                            
-                            $('#email').css('border', '1px solid red');
-                            
 
-                        }
-                        else{
+                            $('#email').css('border', '1px solid red');
+
+
+                        } else {
 
                             alert("fill the field");
                         }
@@ -615,7 +614,9 @@ window.initAutocomplete = initAutocomplete;
                     progress();
                 }, 300);
             });
-            $("#phone").mask("(999) 999-9999");
+            // $("#phone").mask("(999) 999-9999");
+            $(":input").inputmask();
+            $("#phone").inputmask({"mask": "(999) 999-9999"});
         });
 
         function progress() {
@@ -629,14 +630,14 @@ window.initAutocomplete = initAutocomplete;
                 $('#firstname').css('background-color', 'green');
                 $('#firstname').addClass('next-btn');
                 $('#valid_name').css('display', 'none');
-                            
+
                 $('#first_name').css('border', '1px solid grey');
             } else {
                 $('#firstname').addClass('disabled');
                 $('#firstname').css('background-color', 'grey');
                 $('#firstname').removeClass('next-btn');
                 $('#valid_name').css('display', 'block');
-                            
+
                 $('#first_name').css('border', '1px solid red');
             }
         }
@@ -645,14 +646,14 @@ window.initAutocomplete = initAutocomplete;
             if (/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/.test(val)) {
                 // $('#validate_email').removeClass('disabled');
                 $('#valid_email').css('display', 'none');
-                            
+
                 $('#email').css('border', '1px solid grey');
                 $('#validate_email').css('background-color', 'green');
                 $('#validate_email').addClass('next-btn');
             } else {
                 // $('#validate_email').addClass('disabled');
                 $('#valid_email').css('display', 'block');
-                            
+
                 $('#email').css('border', '1px solid red');
                 $('#validate_email').css('background-color', 'grey');
                 $('#validate_email').removeClass('next-btn');
@@ -673,19 +674,17 @@ window.initAutocomplete = initAutocomplete;
                 $('#address_validate').css('background-color', 'grey');
                 $('#address_validate').removeClass('next-btn');
             }
-            if(address != ''){
+            if (address != '') {
                 $('#valid_address').css('display', 'none');
                 $('#autocomplete').css('border', '1px solid grey');
-            }
-            else{
+            } else {
                 $('#valid_address').css('display', 'block');
                 $('#autocomplete').css('border', '1px solid red');
             }
-            if(zipcode != ''){
+            if (zipcode != '') {
                 $('#valid_zip_code').css('display', 'none');
                 $('#zip_code').css('border', '1px solid grey');
-            }
-            else{
+            } else {
                 $('#valid_zip_code').css('display', 'block');
                 $('#zip_code').css('border', '1px solid red');
             }
@@ -710,8 +709,12 @@ window.initAutocomplete = initAutocomplete;
             }
 
             if ($month <= 12 && $month >= 1) {
+
                 $('#valid_month').css('display', 'none');
                 $('#bd_month').css('border', '1px solid grey');
+                if ($month.length == 2) {
+                    $('#bd_day').focus();
+                }
             } else {
                 $('#valid_month').css('display', 'block');
                 $('#bd_month').css('border', '1px solid red');
@@ -728,6 +731,9 @@ window.initAutocomplete = initAutocomplete;
             if ($day <= 31 && $day >= 1) {
                 $('#valid_day').css('display', 'none');
                 $('#bd_day').css('border', '1px solid grey');
+                if ($day.length == 2) {
+                    $('#bd_year').focus();
+                }
             } else {
                 $('#valid_day').css('display', 'block');
                 $('#bd_day').css('border', '1px solid red');
@@ -764,7 +770,7 @@ window.initAutocomplete = initAutocomplete;
                 $('#phone').css('border', '1px solid red');
             }
 
-            
+
         }
 
         function validate_phone() {
@@ -774,7 +780,7 @@ window.initAutocomplete = initAutocomplete;
             if (type == 'button') {
                 $('#valid_phone').css('display', 'block');
                 $('#phone').css('border', '1px solid red');
-                
+
             }
         }
         // function monthSelect(val){
@@ -813,5 +819,4 @@ window.initAutocomplete = initAutocomplete;
         //     }
         // }
     </script>
-    
 @endsection
