@@ -248,23 +248,21 @@
                                             <p class="style_phone" id="valid_phone">Enter Valid Phone</p>
                                         </div>
                                 </div>
-
-                                <p class="clk-terms" style="margin-top:20px!important;">By clicking the View My Results Button, I agree to the consents below
-                                    the button.</p>
+                    
 
 
                                 <div class="clearall"></div>
-                                <button class="continue-btn" id="results" type='button'
+                                <button class="continue-btn" id="results" type='button' cursor='help'
                                     style="border: none!important;
                         outline: none!important;"
                                     onclick="validate_phone()">
-                                    <a href="javascript:void(0);" class="phone">View My Results</a>
+                                    <a href="javascript:void(0);" style="width: 100%">View My Results</a>
                                 </button>
                                 <p class="btn-back"><img src="{{ asset('images/back-arw.png') }}"><span>Previous</span>
                                 </p>
 
                             </div>
-
+                            
                             <p class="btm-terms"><strong>Consent to Be Contacted</strong>. I agree to be contacted by
                                 select insurance carriers and financial institutions listed <a href="#">here</a>,
                                 their agents, individual insurance agents, and/or Assurance for marketing purposes
@@ -273,7 +271,9 @@
                                 number is on a do not call list, or by email at the email address I have provided. Texts
                                 about these offers may be sent from Assurance’s Shopper Alerts number, 71953 (message & data
                                 rates may apply). Consent is not required to make a purchase and I can opt out any time.</p>
-
+                            
+                            <p class="btm-terms" style="margin-top:20px!important;">By clicking the View My Results Button, I agree to the consents below
+                                    the button.</p>
                             <p class="btm-terms"><strong>Consent to Share Information.</strong> I agree to Assurance
                                 sharing my information with Prudential companies and affiliates so that they can market
                                 their products and services to me, and to Assurance sharing my information with third-party
@@ -480,9 +480,23 @@ window.initAutocomplete = initAutocomplete;
         }
     </script>
     <script type="text/javascript">
-        $(document).ready(function() {
+        
+           
 
+    
+        $(document).ready(function() {
+            
             $('.continue-btn').css('background-color', 'grey');
+            $('body').on('keyup', '#bd_month',function(){
+                if (this.value.length === parseInt(this.attributes["maxlength"].value)) {
+                    $('#bd_day').focus();
+                }
+                })
+            $('body').on('keyup','#bd_day', function(){
+            if (this.value.length === parseInt(this.attributes["maxlength"].value)) {
+                $('#bd_year').focus();
+            }
+            })
             // $('.next-btn').click(function(e) {
             //     var item = $(this);
             //     setTimeout(function() {
@@ -525,14 +539,14 @@ window.initAutocomplete = initAutocomplete;
                                 alert('Please Enter Zip Code');
                             }
                         } else if ($(item).hasClass('birthday')) {
+                            
                             if ((month <= 12 && month >= 1) && (year >= 1900 && year < 2006) && (
                                     day <= 31 && day >= 1)) {
                                 // alert('if');
                                 $(item).closest('.question-Box').hide();
                                 $(item).closest('.question-Box').next('.question-Box').show();
                             } else {
-                                // alert('kashif');
-                                // alert('Please enter valid birth date');
+                    
                             }
                         } else if ($(item).hasClass('phone')) {
                             // alert('phone');
@@ -799,4 +813,5 @@ window.initAutocomplete = initAutocomplete;
         //     }
         // }
     </script>
+    
 @endsection
