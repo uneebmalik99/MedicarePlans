@@ -34,20 +34,66 @@
 <script src="//thanks.medicarepronto.com/assets/userevents/application.js" async="async"></script>
 <style>
     [data-timed-style='fade']{display:none}[data-timed-style='scale']{display:none}
+    @media only screen and (max-width: 1400px) {
+      .elButton  {
+    color: rgb(255, 255, 255);
+    font-weight: 600;
+    width: 39%%!important;
+    background-color: #06b890;
+    font-size: 32px;
+}
+}
   </style>
-<link rel='icon' type='image/png' href='https://www.freefavicon.com/freefavicons/flags/us-flag-152-8120.png'></link>
+  <link rel="shortcut icon" type="image/x-icon" href="images/favicon.png">
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
 <script>
+  
+ 
+function getURLParameter(name) {
+
+var query = window.location.search.substring(1);
+
+var vars = query.split("&");
+for (var i=0;i<vars.length;i++) {
+var pair = vars[i].split("=");
+if(pair[0] === name){return decodeURI(pair[1]);}
+}
+return "Ringba";
+}
+    
+  
+</script>
+
+ <script>
+
+
+
+setTimeout(function(){
+    if (window.location.href.substr(-2) !== "?R") {
+        window.location = window.location.href + "?R";
+    }
+
+}, 5000);
+
+</script>
+<script src=//b-js.ringba.com/CAf5b75a5d223347c7ad2709f925c429d0 async></script>  
+{{-- <script>
     /*WE CANT LOAD NUMBER POOL WITHOUT THE ZIP IN THE URL OR RINGBA WILL NOT PICK IT UP, SO IT NEEDS TO WAIT*/
     /**************REPLACE URL WITH THE ONE GIVEN TO YOU BY RINGBA FOR THE NUMNER POOL **************/
     function loadNummberpoolScript() {
+      //CAcf73f595e34a4dd68bcd8766fda14a50
+      
       const dynamicScripts = ['https://b-js.ringba.com/CAcf73f595e34a4dd68bcd8766fda14a50'];
+      
       for (let i = 0; i < dynamicScripts.length; i++) {
         const node = document.createElement('script');
         node.src = dynamicScripts[i];
         node.type = 'text/javascript';
         node.async = false;
         document.getElementsByTagName('head')[0].appendChild(node);
+
       }
     }
 
@@ -57,6 +103,7 @@
       $.ajax({
         url: "https://pro.ip-api.com/json/?key=Kibnc0WJFJneJoc",
         success: function(location) {
+          alert(location.zip);
           window.zip_code_r = location.zip;
 
           //ADD ZIP TO URL
@@ -67,7 +114,7 @@
       }).always(function() {
           loadNummberpoolScript();
       });
-    </script>
+    </script> --}}
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=AW-10983951948"></script>
 <script>
@@ -108,7 +155,7 @@
 <div id="col-full-106-110-124" class="col-md-12 innerContent col_left" data-col="full" data-trigger="none" data-animate="fade" data-delay="500" data-title="full column" style="outline: none;">
 <div class="col-inner bgCover  noBorder borderSolid border3px cornersAll radius0 shadow0 P0-top P0-bottom P0H noTopMargin">
 <div class="de elHeadlineWrapper ui-droppable de-editable" id="tmp_headline1-55907-180-176" data-de-type="headline" data-de-editing="false" data-title="headline" data-ce="true" data-trigger="none" data-animate="fade" data-delay="500" style='margin-top: 0px; outline: none; cursor: pointer; font-family: "Droid Sans", Helvetica, sans-serif !important;' aria-disabled="false" data-google-font="Droid+Sans">
-<h1 class="ne elHeadline hsSize3 lh4 elMargin0 elBGStyle0 hsTextShadow0 mfs_21" style="text-align: center; font-size: 28px;" data-bold="inherit" data-gramm="false" contenteditable="false"><b>Seniors 64+ may be entitled to assistance to help pay for groceries, dentures, eyeglasses and hearing aids based on their zip code, thanks to Medicare Flex Cards</b></h1>
+<h1 class="ne elHeadline hsSize3 lh4 elMargin0 elBGStyle0 hsTextShadow0 mfs_21" style="text-align: center; font-size: 28px;" data-bold="inherit" data-gramm="false" contenteditable="false"><b>Looks Like You May Qualify!<b></h1>
 </div>
 <div class="de elImageWrapper de-image-block elAlign_center elMargin0 ui-droppable de-editable" id="tmp_image-21635-157-169" data-de-type="img" data-de-editing="false" data-title="image" data-ce="false" data-trigger="none" data-animate="fade" data-delay="500" style="margin-top: 0px; outline: none; cursor: pointer;" aria-disabled="false" data-imagelink="">
 <img src="data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs=" class="elIMG ximg" alt="" width="" data-imagelink="" height="300" data-src="//thanks.medicarepronto.com/hosted/images/d9/935c96f24a46f38404d4c77248d20d/6273f25f111fff58f028d987_Flex-Card-pwejevage53eu4h68aatpuqrr8bk779colebt2j0qo.png">
@@ -120,7 +167,7 @@
 <div id="col-full-131-184-108" class="col-md-12 innerContent col_left" data-col="full" data-trigger="none" data-animate="fade" data-delay="500" data-title="1st column" style="outline: none;">
 <div class="col-inner bgCover  noBorder borderSolid border3px cornersAll radius0 shadow0 P0-top P0-bottom P0H noTopMargin" style="padding: 0 10px">
 <div class="de elHeadlineWrapper ui-droppable de-editable" id="tmp_subheadline-35739-141-109" data-de-type="headline" data-de-editing="false" data-title="sub-headline" data-ce="true" data-trigger="none" data-animate="fade" data-delay="500" data-gramm="false" style='margin-top: 0px; outline: none; cursor: pointer; font-family: "Droid Sans", Helvetica, sans-serif !important;' aria-disabled="false" data-google-font="Droid+Sans">
-<h2 class="ne elHeadline hsSize2 lh3 elMargin0 elBGStyle0 hsTextShadow0 mfs_22" style="text-align: center; font-size: 28px; color: rgb(228, 59, 44);" data-bold="inherit" data-gramm="false" contenteditable="false"><b>Looks like you may qualify!</b></h2>
+<h2 class="ne elHeadline hsSize2 lh3 elMargin0 elBGStyle0 hsTextShadow0 mfs_22" style="text-align: center; font-size: 28px; color: rgb(228, 59, 44);" data-bold="inherit" data-gramm="false" contenteditable="false"></h2>
 </div>
 <div class="de elHeadlineWrapper ui-droppable de-editable" id="headline-72796" data-de-type="headline" data-de-editing="false" data-title="sub-headline" data-ce="true" data-trigger="none" data-animate="fade" data-delay="500" data-gramm="false" style='margin-top: 10px; outline: none; cursor: pointer; font-family: "Droid Sans", Helvetica, sans-serif !important;' aria-disabled="false" data-google-font="Droid+Sans">
 <h2 class="ne elHeadline hsSize2 lh3 elMargin0 elBGStyle0 hsTextShadow0 mfs_22" style="text-align: center; font-size: 34px;" data-bold="inherit" data-gramm="false" contenteditable="false"><b>Call the Flex Helpline now.</b></h2>
@@ -143,34 +190,18 @@
 </div>
 </div>
 <div class="row bgCover noBorder borderSolid border3px cornersAll radius0 shadow0 P0-top P0-bottom P0H noTopMargin" id="row--81130" data-trigger="none" data-animate="fade" data-delay="500" data-title="3 column row" style="padding-top: 20px; padding-bottom: 20px; margin: 0px; outline: none;">
-<div id="col-left-154" class="col-md-4 innerContent col_left ui-resizable" data-col="left" data-trigger="none" data-animate="fade" data-delay="500" data-title="1st column" style="outline: none;">
-<div class="col-inner bgCover  noBorder borderSolid border3px cornersAll radius0 shadow0 P0-top P0-bottom P0H noTopMargin" style="padding: 0 10px">
-<div class="de elBTN elAlign_center elMargin0 ui-droppable de-editable" id="tmp_button-53720" data-de-type="button" data-de-editing="false" data-title="button" data-ce="false" data-trigger="none" data-animate="fade" data-delay="500" style="margin-top: 0px; outline: none; cursor: pointer;" aria-disabled="false" data-elbuttontype="2">
-<a href="#" class="elButton elButtonSize1 elButtonColor1 elButtonRounded elButtonPadding2 elBtnVP_10 elButtonCorner3 elBtnHP_25 elBTN_b_1 elButtonShadowN1 elButtonTxtColor1 elButtonFull" style="color: rgb(255, 255, 255); font-weight: 600; background-color: rgb(226, 181, 0); font-size: 32px;" rel="noopener noreferrer" data-show-button-ids="row--79679" data-hide-button-ids="row--81130">
-<span class="elButtonMain"><i class="fa_prepended fas fa-phone-volume" contenteditable="false"></i>64-70</span>
-<span class="elButtonSub"></span>
-</a>
-</div>
-</div>
-</div>
-<div id="col-center-120" class="col-md-4 innerContent col_right ui-resizable" data-col="center" data-trigger="none" data-animate="fade" data-delay="500" data-title="2nd column" style="outline: none;">
-<div class="col-inner bgCover  noBorder borderSolid border3px cornersAll radius0 shadow0 P0-top P0-bottom P0H noTopMargin" style="padding: 0 10px">
+
+<div id="col-center-300" class="col-md-4 innerContent col_center ui-resizable" data-col="center" data-trigger="none" data-animate="fade" data-delay="500" data-title="2nd column" style="outline: none;width:100%">
+<div class="col-inner bgCover col-md-4 col-sm-12 col-lg-4 noBorder borderSolid border3px cornersAll radius0 shadow0 P0-top P0-bottom P0H noTopMargin" style="padding: 0 10px;width:100%">
 <div class="de elBTN elAlign_center elMargin0 ui-droppable de-editable" id="button-91631" data-de-type="button" data-de-editing="false" data-title="button" data-ce="false" data-trigger="none" data-animate="fade" data-delay="500" style="margin-top: 0px; outline: none; cursor: pointer;" aria-disabled="false" data-elbuttontype="2">
-<a href="#" class="elButton elButtonSize1 elButtonColor1 elButtonRounded elButtonPadding2 elBtnVP_10 elButtonCorner3 elBtnHP_25 elBTN_b_1 elButtonShadowN1 elButtonTxtColor1 elButtonFull" style="color: rgb(255, 255, 255); font-weight: 600; background-color: rgb(226, 181, 0); font-size: 32px;" rel="noopener noreferrer" data-show-button-ids="row--79679-124" data-hide-button-ids="row--81130" id="undefined-144">
-<span class="elButtonMain"><i class="fa_prepended fas fa-phone-volume" contenteditable="false"></i>71-75</span>
+<a href="#" class="elButton elButtonSize1 elButtonColor1 elButtonRounded elButtonPadding2 elBtnVP_10 elButtonCorner3 elBtnHP_25 elBTN_b_1 elButtonShadowN1 elButtonTxtColor1 elButtonFull" style="color: rgb(255, 255, 255); font-weight: 600; width:38%!important;background-color:#06b890; font-size: 32px;" rel="noopener noreferrer" data-show-button-ids="row--79679-124" data-hide-button-ids="row--81130" id="undefined-144">
+<span class="elButtonMain" id="phone_number"><i class="fas fa-phone-volume" style="margin-left:none!important" contenteditable="false"></i>+18445331058</span>
 <span class="elButtonSub"></span>
 </a>
 </div>
 </div>
 </div>
-<div id="col-right-124" class="col-md-4 innerContent col_right ui-resizable" data-col="right" data-trigger="none" data-animate="fade" data-delay="500" data-title="3rd Column" style="outline: none;">
-<div class="col-inner bgCover  noBorder borderSolid border3px cornersAll radius0 shadow0 P0-top P0-bottom P0H noTopMargin" style="padding: 0 10px"><div class="de elBTN elAlign_center elMargin0 ui-droppable de-editable" id="button-89518" data-de-type="button" data-de-editing="false" data-title="button" data-ce="false" data-trigger="none" data-animate="fade" data-delay="500" style="margin-top: 0px; outline: none; cursor: pointer;" aria-disabled="false" data-elbuttontype="2">
-<a href="#" class="elButton elButtonSize1 elButtonColor1 elButtonRounded elButtonPadding2 elBtnVP_10 elButtonCorner3 elBtnHP_25 elBTN_b_1 elButtonShadowN1 elButtonTxtColor1 elButtonFull" style="color: rgb(255, 255, 255); font-weight: 600; background-color: rgb(226, 181, 0); font-size: 32px;" rel="noopener noreferrer" data-show-button-ids="row--79679-124-178" data-hide-button-ids="row--81130" id="undefined-144-963">
-<span class="elButtonMain"><i class="fa_prepended fas fa-phone-volume" contenteditable="false"></i>76+</span>
-<span class="elButtonSub"></span>
-</a>
-</div></div>
-</div>
+
 </div>
 <div class="row bgCover noBorder borderSolid border3px cornersAll radius0 shadow0 P0-top P0-bottom P0H noTopMargin" id="row--79679" data-trigger="none" data-animate="fade" data-delay="500" data-title="66" style="padding-top: 20px; padding-bottom: 20px; margin: 0px; outline: none; background-color: rgba(66, 185, 159, 0);display: none !important;">
 <div id="col-full-164" class="col-md-12 innerContent col_left" data-col="full" data-trigger="none" data-animate="fade" data-delay="500" data-title="1st column" style="outline: none;">
@@ -696,6 +727,7 @@ window.addEventListener('load', function(){
     <option value="WI">Wisconsin</option>
     <option value="WY">Wyoming</option>
 </script>
+
 <script type="text/html" id="cfx_all_countries">
     <option value="">Select Country</option>
     <option value="">------------------------------</option>

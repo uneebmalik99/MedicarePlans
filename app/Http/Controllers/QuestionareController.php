@@ -153,7 +153,7 @@ class QuestionareController extends Controller
 
         }
         else{
-            dd($response);
+            return view('pages.thankyou');
         }
         /***
          * https://rubicon.leadspediatrack.com/posting-instructions.html?c=5&type=Server
@@ -240,5 +240,8 @@ class QuestionareController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function page_view(){
+        return view('pages.thankyou');
     }
 }
