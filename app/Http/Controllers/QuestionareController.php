@@ -6,7 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Questionaire;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Arr;
 use Carbon\Carbon;
+
 class QuestionareController extends Controller
 {
     /**
@@ -106,15 +108,18 @@ class QuestionareController extends Controller
         
         $data  = $validator->validated();
         //dd($data);
-        $data['s1_id'] = isset($data['s1_id']) ? $data['s1_id'] : rand(100,1000);
-        $data['s2_id'] =  isset($data['s2_id']) ? $data['s2_id'] : rand(100,1000);
-        $data['s3_id'] = isset($data['s3_id']) ? $data['s3_id'] : rand(100,1000);
-        $data['s4_id'] = isset($data['s4_id']) ? $data['s4_id'] : rand(100,1000);
-        $data['s5_id'] = isset($data['s5_id']) ? $data['s5_id'] : rand(100,1000);
+        $data['s1_id'] = isset($data['s1_id']) ? $data['s1_id'] : null;
+        $data['s2_id'] =  isset($data['s2_id']) ? $data['s2_id'] : null;
+        $data['s3_id'] = isset($data['s3_id']) ? $data['s3_id'] : null;
+        $data['s4_id'] = isset($data['s4_id']) ? $data['s4_id'] : null;
+        $data['s5_id'] = isset($data['s5_id']) ? $data['s5_id'] : null;
         $year = $data['bd_year'];
         $month = $data['bd_month'];
-        $day = $data['bd_year'];
-        $dob = $year+$month+$day;
+        $day = $data['bd_day'];
+        
+        $dob = strval($year).'-'.strval($month).'-'.strval($day);
+        $age = Carbon::parse($dob)->age;
+        
 		if(isset($data['med_care']) && $data['med_care'] == 1){
 			$currently_enrolled = 'Yes';
 		}
@@ -147,13 +152,15 @@ class QuestionareController extends Controller
         ]);
         if($response->successful()){
             logger($response);
-		
+            $query=['s1'=>$data['s1_id'], 's2'=>$data['s2_id'] , 's3' => $data['s3_id'],'s4' => $data['s4_id'],'s5' => $data['s5_id'],'age' => $age,'transaction_id'=>$transaction_id,'aff_id'=>$data['aff_id']];
             $inserted = Questionaire::create($data);
-            return view('pages.thankyou');
+            return redirect()->route('thankyou',$query);
 
         }
         else{
-            return view('pages.thankyou');
+            $query=['s1'=>$data['s1_id'], 's2'=>$data['s2_id'] , 's3' => $data['s3_id'],'s4' => $data['s4_id'],'s5' => $data['s5_id'],'age' => $age,'transaction_id'=>$transaction_id,'aff_id'=>$data['aff_id']];
+
+            return redirect()->route('thankyou',$query);
         }
         /***
          * https://rubicon.leadspediatrack.com/posting-instructions.html?c=5&type=Server
@@ -241,7 +248,21 @@ class QuestionareController extends Controller
     {
         //
     }
-    public function page_view(){
-        return view('pages.thankyou');
+    public function page_view(Request $request){
+        $s1 = $request->query('s1');
+
+        // returns "Bar"
+        $s2 = $request->query('s2');
+        $s3 = $request->query('s3');
+
+        // returns "Bar"
+        $s4 = $request->query('s4');
+        $s5 = $request->query('s5');
+
+        // returns "Bar"
+        $transaction_id = $request->query('transaction_id');
+        $aff_id = $request->query('aff_id');
+        $age = $request->query('age');
+        return view('pages.thankyou',['s_1' => $s1,'s_2' => $s2,'s_3' => $s3 ,'s_4' => $s4,'s_5' => $s5,'transaction_id' => $transaction_id, 'aff_id' => $aff_id,'age' => $age]);
     }
 }
