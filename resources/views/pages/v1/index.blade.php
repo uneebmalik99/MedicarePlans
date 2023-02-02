@@ -33,7 +33,7 @@
             border-radius: 10px;
             border: none;
             outline: none;
-            padding: 0 15px;
+            padding: 12px 40px;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -140,7 +140,7 @@
                         </div>
                         <div class="row mt-5">
                             <div class="col-12 d-flex justify-content-around align-items-center">
-                                <button class="btn">
+                                <button type="button" class="btn">
                                     <svg width="20" height="20" viewBox="0 0 38 38" fill="none"
                                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                         <rect width="38" height="38" fill="url(#pattern0)" />
@@ -155,7 +155,7 @@
                                     </svg>
 
                                     <span>64-70</span></button>
-                                <button class="btn">
+                                <button type="button" class ="btn">
                                     <svg width="20" height="20" viewBox="0 0 38 38" fill="none"
                                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                         <rect width="38" height="38" fill="url(#pattern0)" />
@@ -170,7 +170,7 @@
                                     </svg>
 
                                     <span>71-75</span></button>
-                                <button class="btn">
+                                <button type="button" class="btn">
                                     <svg width="20" height="20" viewBox="0 0 38 38" fill="none"
                                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                         <rect width="38" height="38" fill="url(#pattern0)" />
@@ -193,8 +193,8 @@
                                 <p class="question_text_f2">Part A covers hospital care. Part B covers medical care.</p>
 
                             </div>
-                            <div class="col-6 mx-auto d-flex justify-content-around align-items-center mt-3">
-                                <button class="btn">
+                            <div class="col-8 mx-auto d-flex d-flex justify-content-around align-items-center mt-3">
+                                <button class="btn" type="button">
                                     <svg width="9" height="9" viewBox="0 0 9 9" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -205,7 +205,7 @@
                                             stroke="black" />
                                     </svg>
                                     <span>YES</span></button>
-                                <button class="btn">
+                                <button class="btn" type="button">
                                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path d="M8.33334 8.33317L1.66667 1.6665M8.33334 1.6665L1.66667 8.33317"
@@ -240,7 +240,7 @@
             </div>
             <div class="row">
                 <div class="col-12 d-flex justify-content-center align-items-center">
-                    <button class="result_btn" onclick="save_form()">View My Results</button>
+                    <button class="result_btn" type="submit">View My Results</button>
                 </div>
 
             </div>
