@@ -152,13 +152,13 @@ class QuestionareController extends Controller
         ]);
         if($response->successful()){
             logger($response);
-            $query=['s1'=>$data['s1_id'], 's2'=>$data['s2_id'] , 's3' => $data['s3_id'],'s4' => $data['s4_id'],'s5' => $data['s5_id'],'age' => $age,'transaction_id'=>$transaction_id,'aff_id'=>$data['aff_id']];
+            $query=['s1'=>$data['s1_id'], 's2'=>$data['s2_id'] , 's3' => $data['s3_id'],'s4' => $data['s4_id'],'s5' => $data['s5_id'],'age' => $age,'transaction_id'=>$data['transaction_id'],'aff_id'=>$data['aff_id'],'zip_code' => $data['zip_code']];
             $inserted = Questionaire::create($data);
             return redirect()->route('thankyou',$query);
 
         }
         else{
-            $query=['s1'=>$data['s1_id'], 's2'=>$data['s2_id'] , 's3' => $data['s3_id'],'s4' => $data['s4_id'],'s5' => $data['s5_id'],'age' => $age,'transaction_id'=>$transaction_id,'aff_id'=>$data['aff_id']];
+            $query=['s1'=>$data['s1_id'], 's2'=>$data['s2_id'] , 's3' => $data['s3_id'],'s4' => $data['s4_id'],'s5' => $data['s5_id'],'age' => $age,'transaction_id'=>$data['transaction_id'],'aff_id'=>$data['aff_id'],'zip_code' => $data['zip_code']];
 
             return redirect()->route('thankyou',$query);
         }
