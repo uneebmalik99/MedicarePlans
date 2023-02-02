@@ -42,6 +42,9 @@
         .btn span {
             margin-left: 6px;
         }
+        .btn:hover{
+            border: 2px solid #2E75BF ;
+        }
 
         .question_text_f1 {
             font-family: 'Inter';
@@ -86,7 +89,7 @@
             width: 75% !important;
             height: 45px !important;
         }
-
+        
         ::placeholder{
             font-family: 'Inter';
             font-style: normal;
@@ -123,7 +126,10 @@
     </style>
 
     <div class="container rounded">
-        <form>
+        <form action="{{route('v1_store')}}" method="POST">
+            @csrf
+            
+
         <div class="card">
             <header class="rounded mx-auto">
                 {{-- <div class="header-text container-fluid mx-auto"> --}}
@@ -135,12 +141,12 @@
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                         <div class="row mt-1">
                             <div class="col-12 d-flex justify-content-center align-items-center">
-                                <h6>How Old are You?</h6>
+                                <h6><b>How Old are You?</b></h6>
                             </div>
                         </div>
                         <div class="row mt-5">
                             <div class="col-12 d-flex justify-content-around align-items-center">
-                                <button type="button" class="btn">
+                                <input type="button" class="btn bd_class_1" name="bd_class" value="64-70"/>
                                     <svg width="20" height="20" viewBox="0 0 38 38" fill="none"
                                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                         <rect width="38" height="38" fill="url(#pattern0)" />
@@ -154,8 +160,8 @@
                                         </defs>
                                     </svg>
 
-                                    <span>64-70</span></button>
-                                <button type="button" class ="btn">
+                                    
+                                <button type="button" class ="btn bd_class_2" name="bd_class" value="71-75">
                                     <svg width="20" height="20" viewBox="0 0 38 38" fill="none"
                                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                         <rect width="38" height="38" fill="url(#pattern0)" />
@@ -170,7 +176,7 @@
                                     </svg>
 
                                     <span>71-75</span></button>
-                                <button type="button" class="btn">
+                                <button type="button" class="btn bd_class_3" name="bd_class" value="76+">
                                     <svg width="20" height="20" viewBox="0 0 38 38" fill="none"
                                         xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                                         <rect width="38" height="38" fill="url(#pattern0)" />
@@ -194,7 +200,7 @@
 
                             </div>
                             <div class="col-8 mx-auto d-flex d-flex justify-content-around align-items-center mt-3">
-                                <button class="btn" type="button">
+                                <button class="btn med_care_yes" type="button" name="med_care" value="1">
                                     <svg width="9" height="9" viewBox="0 0 9 9" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path
@@ -205,7 +211,7 @@
                                             stroke="black" />
                                     </svg>
                                     <span>YES</span></button>
-                                <button class="btn" type="button">
+                                <button class="btn med_care_no" type="button" name="med_care" value="0">
                                     <svg width="10" height="10" viewBox="0 0 10 10" fill="none"
                                         xmlns="http://www.w3.org/2000/svg">
                                         <path d="M8.33334 8.33317L1.66667 1.6665M8.33334 1.6665L1.66667 8.33317"
@@ -219,18 +225,18 @@
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                         <div class="row d-block">
                             <div class="form-group">
-                                <label class="input_label" for="formGroupExampleInput">Name</label>
-                                <input type="text" class="form-control" id="formGroupExampleInput"
+                                <label class="input_label"  for="formGroupExampleInput">Name</label>
+                                <input type="text" name="name" class="form-control" id="formGroupExampleInput"
                                     placeholder="name">
                             </div>
                             <div class="form-group">
                                 <label class="input_label" for="formGroupExampleInput2">Email</label>
-                                <input type="text" class="form-control" id="formGroupExampleInput2"
+                                <input type="text" name="email" class="form-control" id="formGroupExampleInput2"
                                     placeholder="email">
                             </div>
                             <div class="form-group">
                                 <label class="input_label" for="formGroupExampleInput2">Phone</label>
-                                <input type="text" class="form-control" id="formGroupExampleInput2"
+                                <input type="text" name="phone" class="form-control" id="formGroupExampleInput2"
                                     placeholder="phone">
                             </div>
                         </div>
@@ -263,8 +269,38 @@
     <script>
         $(function() {
                 $('.btn').click(function(){
-                    $('.btn').removeClass('active');
-                        $(this).addClass('active');
+                    if($(this).hasClass('med_care_yes')){
+                        $('.med_care_no').removeClass('active');
+                        $('.med_care_yes').addClass('active');
+                        $('.med_care_yes').val("64-70");
+                    }
+                    if($(this).hasClass('med_care_no')){
+                        $('.med_care_yes').removeClass('active');
+                        $('.med_care_no').addClass('active');
+                        $('.med_care_no').val(0);
+                    }
+                    if($(this).hasClass('bd_class_1')){
+                        $('.bd_class_2').removeClass('active');
+                        $('.bd_class_3').removeClass('active');
+
+                        $('.bd_class_1').addClass('active');
+                        $('.bd_class_1').val(1);
+                    }
+                    if($(this).hasClass('bd_class_2')){
+                        $('.bd_class_1').removeClass('active');
+                        $('.bd_class_3').removeClass('active');
+
+                        $('.bd_class_2').addClass('active');
+                        $('.bd_class_2').val(1);
+                    }
+                    if($(this).hasClass('bd_class_3')){
+                        $('.bd_class_2').removeClass('active');
+                        $('.bd_class_1').removeClass('active');
+
+                        $('.bd_class_3').addClass('active');
+                        $('.bd_class_3').val(1);
+                    }
+                    
                 });
         });
     </script>

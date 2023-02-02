@@ -38,13 +38,13 @@ return new class extends Migration
             $table->text('first_name')->nullable();
             $table->text('last_name')->nullable();
             $table->text('address')->nullable();
-            $table->integer('s1_id')->nullable();
-            $table->integer('s2_id')->nullable();
-            $table->integer('s3_id')->nullable();
-            $table->integer('s4_id')->nullable();
-            $table->integer('s5_id')->nullable();
-            $table->integer('transaction_id')->nullable();
-            $table->integer('aff_id')->nullable();
+            $table->text('s1_id')->nullable();
+            $table->text('s2_id')->nullable();
+            $table->text('s3_id')->nullable();
+            $table->text('s4_id')->nullable();
+            $table->text('s5_id')->nullable();
+            $table->text('transaction_id')->nullable();
+            $table->text('aff_id')->nullable();
 
             $table->timestamps();
         });

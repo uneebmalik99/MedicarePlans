@@ -20,19 +20,19 @@ class QuestionareController extends Controller
     {
         //dd($s_1,$s_2,$s_3,$s_4,$s_5,$transaction_id);
              //   dd($request);
-             $s1 = $request->query('s1');
+             $s1 = $request->query('sub1');
 
              // returns "Bar"
-             $s2 = $request->query('s2');
-             $s3 = $request->query('s3');
+             $s2 = $request->query('sub2');
+             $s3 = $request->query('sub3');
 
              // returns "Bar"
-             $s4 = $request->query('s4');
-             $s5 = $request->query('s5');
+             $s4 = $request->query('sub4');
+             $s5 = $request->query('sub5');
 
              // returns "Bar"
              $transaction_id = $request->query('transaction_id');
-             $aff_id = $request->query('aff_id');
+             $aff_id = $request->query('affid');
             return view('pages.questionare1',['s_1' => $s1,'s_2' => $s2,'s_3' => $s3 ,'s_4' => $s4,'s_5' => $s5,'transaction_id' => $transaction_id, 'aff_id' => $aff_id]  );
        
     }
@@ -82,13 +82,13 @@ class QuestionareController extends Controller
             'first_name' => 'required|string',
             'last_name' => 'string|nullable',
             'address' => 'string|max:255|min:7',
-            's1_id' => 'numeric|nullable',
-            's2_id' => 'numeric|nullable',
-            's3_id' => 'numeric|nullable',
-            's4_id' => 'numeric|nullable',
-            's5_id' => 'numeric|nullable',
-            'transaction_id' => 'numeric|nullable',
-            'aff_id' => 'numeric|nullable',
+            's1_id' => 'nullable',
+            's2_id' => 'nullable',
+            's3_id' => 'nullable',
+            's4_id' => 'nullable',
+            's5_id' => 'nullable',
+            'transaction_id' => 'nullable',
+            'aff_id' => 'nullable',
         ] 
         );
         /****
@@ -152,13 +152,13 @@ class QuestionareController extends Controller
         ]);
         if($response->successful()){
             logger($response);
-            $query=['s1'=>$data['s1_id'], 's2'=>$data['s2_id'] , 's3' => $data['s3_id'],'s4' => $data['s4_id'],'s5' => $data['s5_id'],'age' => $age,'transaction_id'=>$data['transaction_id'],'aff_id'=>$data['aff_id'],'zip_code' => $data['zip_code']];
+            $query=['transaction_id'=>$data['transaction_id'],'sub1'=>$data['s1_id'], 'sub2'=>$data['s2_id'] , 'sub3' => $data['s3_id'],'sub4' => $data['s4_id'],'sub5' => $data['s5_id'],'affid'=>$data['aff_id'],'age' => $age,'zip_code' => $data['zip_code']];
             $inserted = Questionaire::create($data);
             return redirect()->route('thankyou',$query);
 
         }
         else{
-            $query=['s1'=>$data['s1_id'], 's2'=>$data['s2_id'] , 's3' => $data['s3_id'],'s4' => $data['s4_id'],'s5' => $data['s5_id'],'age' => $age,'transaction_id'=>$data['transaction_id'],'aff_id'=>$data['aff_id'],'zip_code' => $data['zip_code']];
+            $query=['sub1'=>$data['s1_id'], 'sub2'=>$data['s2_id'] , 'sub3' => $data['s3_id'],'sub4' => $data['s4_id'],'sub5' => $data['s5_id'],'age' => $age,'transaction_id'=>$data['transaction_id'],'affid'=>$data['aff_id'],'zip_code' => $data['zip_code']];
 
             return redirect()->route('thankyou',$query);
         }
@@ -268,5 +268,18 @@ class QuestionareController extends Controller
 
     public function v1_index(Request $request){
         return view('pages.v1.index');
+    }
+    public function v1_store(Request $request){
+        dd($request);
+        $validator = Validator::make($request, [
+            'bd_class' => 'nullable|string',
+            
+            'med_care' => 'nullable|boolean',
+            'name' => 'nullable|string',
+            'email' => 'nullable|string|email',
+            'phone' => 'nullable',
+            
+        ]); 
+    
     }
 }

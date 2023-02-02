@@ -80,7 +80,7 @@
                                 </label>
                             </div>
                             {{-- <p class="skip-text"><span class="next-btn">Skip</span></p> --}}
-                            <p class="call-text">Or Call: <a href="tel:(844) 123-4567">(844) 123-4567</a></p>
+                            <p class="call-text">Or Call: <a href="tel:18445331058">(844) 533 - 1058</a></p>
                         </div>
                     </div>
 
@@ -126,7 +126,7 @@
                                     style="margin-top:28px!important;" id="bd_div">Continue</a>
                             </div>
                             {{-- <p class="skip-text"><span class="next-btn">Skip</span></p> --}}
-                            <p class="call-text">Or Call: <a href="tel:(844) 123-4567">(844) 123-4567</a></p>
+                            <p class="call-text">Or Call: <a href="tel:18445331058">(844) 533 - 1058</a></p>
                             <div class="clearall"></div>
                             <p class="btn-back"><img src="{{ asset('images/back-arw.png') }}"><span>Previous</span></p>
                         </div>
@@ -171,7 +171,7 @@
                                 <a href="javascript:void(0);" class="continue-btn next-btn address_zip"
                                     id="address_validate" style="margin-top: 25px;">Continue</a>
                             </div>
-                            <p class="call-text">Or Call: <a href="tel:(844) 123-4567">(844) 123-4567</a></p>
+                            <p class="call-text">Or Call: <a href="tel:18445331058">(844) 533 - 1058</a></p>
                             <div class="clearall"></div>
                             <p class="btn-back"><img src="{{ asset('images/back-arw.png') }}"><span>Previous</span></p>
                         </div>
@@ -214,7 +214,7 @@
                                 <a href="javascript:void(0);" style="margin-top: 25px"
                                     class="continue-btn next-btn firstname" id="firstname">Continue</a>
                             </div>
-                            <p class="call-text">Or Call: <a href="tel:(844) 123-4567">(844) 123-4567</a></p>
+                            <p class="call-text">Or Call: <a href="tel:18445331058">(844) 533 - 1058</a></p>
                             <div class="clearall"></div>
                             <p class="btn-back"><img src="{{ asset('images/back-arw.png') }}"><span>Previous</span></p>
                         </div>
@@ -237,7 +237,8 @@
                                     id="validate_email">Continue</a>
                             </div>
                             {{-- <p class="skip-text"><span class="next-btn">Skip</span></p> --}}
-                            <p class="call-text">Or Call: <a href="tel:(844) 123-4567">(844) 123-4567</a></p>
+                            {{--18445331058--}}
+                            <p class="call-text">Or Call: <a href="tel:18445331058">(844) 533 - 1058</a></p>
                             <div class="clearall"></div>
                             <p class="btn-back"><img src="{{ asset('images/back-arw.png') }}"><span>Previous</span></p>
                         </div>
@@ -312,6 +313,7 @@
     </div>
 @endsection
 @section('scripts')
+<script src=//b-js.ringba.com/CAcf73f595e34a4dd68bcd8766fda14a50 async></script>  
     <script type="text/javascript">
         // Initialize and add the map
         function initMap() {
