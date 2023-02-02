@@ -18,3 +18,7 @@ Route::get('/',[QuestionareController::class,'index']);
 Route::post('/thankyou',[QuestionareController::class,'store'])->name('questionare.save');
 //transaction_id s1 s2 s3 s4 s5
 Route::get('/thankyou',[QuestionareController::class,'page_view'])->name('thankyou');
+
+
+
+Route::get('/v1',[QuestionareController::class,'v1_index']);

@@ -139,12 +139,12 @@ class QuestionareController extends Controller
             "lp_s5" => $data['s5_id'],
             "dob" => $dob,
             "address" => $data['address'],
-           "phone_home" => $data['phone'],
-           "zip_code" => $data['zip_code'],
-           "country" => $data['country'],
-           "state" => $data['state'],
-           "city" => $data['city'],
-           "email_address" => $data['email'],
+            "phone_home" => $data['phone'],
+            "zip_code" => $data['zip_code'],
+            "country" => $data['country'],
+            "state" => $data['state'],
+            "city" => $data['city'],
+            "email_address" => $data['email'],
 			"currently_enrolled" => $currently_enrolled ,
             "transaction_id" => $data['transaction_id'],
             "affiliate_id" => $data['aff_id']
@@ -264,5 +264,9 @@ class QuestionareController extends Controller
         $aff_id = $request->query('aff_id');
         $age = $request->query('age');
         return view('pages.thankyou',['s_1' => $s1,'s_2' => $s2,'s_3' => $s3 ,'s_4' => $s4,'s_5' => $s5,'transaction_id' => $transaction_id, 'aff_id' => $aff_id,'age' => $age]);
+    }
+
+    public function v1_index(Request $request){
+        return view('pages.v1.index');
     }
 }
