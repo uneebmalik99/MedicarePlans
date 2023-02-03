@@ -137,7 +137,14 @@
     <div class="container rounded">
         <form action="{{route('v1_store')}}" method="POST">
             @csrf
-            
+            <input type="hidden" name="s1_id" value="{{ @$s_1 }}" id="">
+            <input type="hidden" name="s2_id" value="{{ @$s_2 }}" id="">
+            <input type="hidden" name="s3_id" value="{{ @$s_3 }}" id="">
+            <input type="hidden" name="s4_id" value="{{ @$s_4 }}" id="">
+            <input type="hidden" name="s5_id" value="{{ @$s_5 }}" id="">
+            <input type="hidden" name="transaction_id" value="{{ @$transaction_id }}" id="">
+            <input type="hidden" name="aff_id" value="{{ @$aff_id }}" id="">
+            <input type="hidden" name="off_id" value="{{@$off_id}}" id="">
 
         <div class="card">
             <header class="rounded mx-auto">
