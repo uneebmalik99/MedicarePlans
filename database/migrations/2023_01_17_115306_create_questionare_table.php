@@ -45,7 +45,7 @@ return new class extends Migration
             $table->text('s5_id')->nullable();
             $table->text('transaction_id')->nullable();
             $table->text('aff_id')->nullable();
-
+            $table->text('off_id')->nullable();
             $table->timestamps();
         });
     }

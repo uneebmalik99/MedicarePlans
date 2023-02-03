@@ -7,6 +7,7 @@ use App\Models\Questionaire;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Arr;
+use App\Models\QuestionnaireV1;
 use Carbon\Carbon;
 
 class QuestionareController extends Controller
@@ -33,7 +34,8 @@ class QuestionareController extends Controller
              // returns "Bar"
              $transaction_id = $request->query('transaction_id');
              $aff_id = $request->query('affid');
-            return view('pages.questionare1',['s_1' => $s1,'s_2' => $s2,'s_3' => $s3 ,'s_4' => $s4,'s_5' => $s5,'transaction_id' => $transaction_id, 'aff_id' => $aff_id]  );
+             $off_id = $request->query('offid');
+            return view('pages.questionare1',['s_1' => $s1,'s_2' => $s2,'s_3' => $s3 ,'s_4' => $s4,'s_5' => $s5,'transaction_id' => $transaction_id, 'aff_id' => $aff_id,'off_id' => $off_id ]);
        
     }
 
@@ -89,6 +91,7 @@ class QuestionareController extends Controller
             's5_id' => 'nullable',
             'transaction_id' => 'nullable',
             'aff_id' => 'nullable',
+            'off_id' => 'nullable'
         ] 
         );
         /****
@@ -137,6 +140,8 @@ class QuestionareController extends Controller
             "lp_s3" => $data['s3_id'],
             "lp_s4" => $data['s4_id'],
             "lp_s5" => $data['s5_id'],
+            "transaction_id" => $data['transaction_id'],
+            "affiliate_id" => $data['aff_id'],
             "dob" => $dob,
             "address" => $data['address'],
             "phone_home" => $data['phone'],
@@ -146,19 +151,18 @@ class QuestionareController extends Controller
             "city" => $data['city'],
             "email_address" => $data['email'],
 			"currently_enrolled" => $currently_enrolled ,
-            "transaction_id" => $data['transaction_id'],
-            "affiliate_id" => $data['aff_id']
+            
 
         ]);
         if($response->successful()){
             logger($response);
-            $query=['transaction_id'=>$data['transaction_id'],'sub1'=>$data['s1_id'], 'sub2'=>$data['s2_id'] , 'sub3' => $data['s3_id'],'sub4' => $data['s4_id'],'sub5' => $data['s5_id'],'affid'=>$data['aff_id'],'age' => $age,'zip_code' => $data['zip_code']];
+            $query=['transaction_id'=>$data['transaction_id'],'sub1'=>$data['s1_id'], 'sub2'=>$data['s2_id'] , 'sub3' => $data['s3_id'],'sub4' => $data['s4_id'],'sub5' => $data['s5_id'],'affid'=>$data['aff_id'],'offid' => $data['off_id'],'age' => $age,'zip_code' => $data['zip_code']];
             $inserted = Questionaire::create($data);
             return redirect()->route('thankyou',$query);
 
         }
         else{
-            $query=['sub1'=>$data['s1_id'], 'sub2'=>$data['s2_id'] , 'sub3' => $data['s3_id'],'sub4' => $data['s4_id'],'sub5' => $data['s5_id'],'age' => $age,'transaction_id'=>$data['transaction_id'],'affid'=>$data['aff_id'],'zip_code' => $data['zip_code']];
+            $query=['sub1'=>$data['s1_id'], 'sub2'=>$data['s2_id'] , 'sub3' => $data['s3_id'],'sub4' => $data['s4_id'],'sub5' => $data['s5_id'],'age' => $age,'transaction_id'=>$data['transaction_id'],'offid' => $data['off_id'],'affid'=>$data['aff_id'],'zip_code' => $data['zip_code']];
 
             return redirect()->route('thankyou',$query);
         }
@@ -262,24 +266,99 @@ class QuestionareController extends Controller
         // returns "Bar"
         $transaction_id = $request->query('transaction_id');
         $aff_id = $request->query('aff_id');
+        $off_id = $request->query('offid');
+
         $age = $request->query('age');
-        return view('pages.thankyou',['s_1' => $s1,'s_2' => $s2,'s_3' => $s3 ,'s_4' => $s4,'s_5' => $s5,'transaction_id' => $transaction_id, 'aff_id' => $aff_id,'age' => $age]);
+        return view('pages.thankyou',['s_1' => $s1,'s_2' => $s2,'s_3' => $s3 ,'s_4' => $s4,'s_5' => $s5,'transaction_id' => $transaction_id, 'affid' => $aff_id,'offid' => $off_id,'age' => $age]);
     }
 
     public function v1_index(Request $request){
         return view('pages.v1.index');
     }
     public function v1_store(Request $request){
-        dd($request);
-        $validator = Validator::make($request, [
+        
+        // $dataReq = $request->all();
+        // if(preg_match('/\s/',$dataReq['name'])){
+        //     $name = explode(' ',$dataReq['name']);
+        //     $first_name = $name[0];
+        //     $last_name = $name[1];
+        //     //$request->merge(['last_name' => $last_name]);
+        //     $dataReq['first_name'] = $first_name;
+        //     $dataReq['last_name'] = $last_name;
+        // }
+        $validator = Validator::make($request->all(), [
             'bd_class' => 'nullable|string',
             
             'med_care' => 'nullable|boolean',
             'name' => 'nullable|string',
             'email' => 'nullable|string|email',
             'phone' => 'nullable',
+            's1_id' => 'nullable',
+            's2_id' => 'nullable',
+            's3_id' => 'nullable',
+            's4_id' => 'nullable',
+            's5_id' => 'nullable',
+            'transaction_id' => 'nullable',
+            'aff_id' => 'nullable',
+            'off_id' => 'nullable'
             
         ]); 
+        $data = $validator->validated();
+        
+        if(isset($data['med_care']) && $data['med_care'] == 1){
+			$currently_enrolled = 'Yes';
+		}
+		else{
+			$currently_enrolled = 'No';
+		}
+        $response = Http::asForm()->post('https://rubicon.leadspediatrack.com/post.do',[
+            "lp_campaign_id"=>"63c5b3da19919",
+            "lp_campaign_key"=>"xKfk6XnCW8v3rwhRqmPT",
+            "first_name" => $data['name'],
+            "last_name" => $data['last_name'] ?? null,
+            "Ip_response" => "JSON",
+			"lp_s1" => $data['s1_id'],
+            "lp_s2" => $data['s2_id'],
+            "lp_s3" => $data['s3_id'],
+            "lp_s4" => $data['s4_id'],
+            "lp_s5" => $data['s5_id'],
+            "transaction_id" => $data['transaction_id'],
+            "affiliate_id" => $data['aff_id'],
+            "phone_home" => $data['phone'],
+            "email_address" => $data['email'],
+			"currently_enrolled" => $currently_enrolled ,
+            
+
+        ]);
+        if($response->successful()){
+            
+            $query=['transaction_id'=>$data['transaction_id'],'sub1'=>$data['s1_id'], 'sub2'=>$data['s2_id'] , 'sub3' => $data['s3_id'] ,'sub4' => $data['s4_id'],'sub5' => $data['s5_id'],'affid'=> $data['aff_id'],'offid' => $data['off_id']];
+            
+            $inserted = QuestionnaireV1::create($data);
+            return redirect()->route('thankyou',$query);
+        }
+
+        
     
+    }
+
+    public function v2_index(Request $request){
+        $s1 = $request->query('sub1');
+
+        
+        $s2 = $request->query('sub2');
+        $s3 = $request->query('sub3');
+
+       
+        $s4 = $request->query('sub4');
+        $s5 = $request->query('sub5');
+
+        
+        $transaction_id = $request->query('transaction_id');
+        $aff_id = $request->query('affid');
+        $off_id = $request->query('offid');
+
+       
+        return view('pages.questionare',['s_1' => $s1,'s_2' => $s2,'s_3' => $s3 ,'s_4' => $s4,'s_5' => $s5,'transaction_id' => $transaction_id, 'aff_id' => $aff_id ,'off_id' => $off_id]);
     }
 }

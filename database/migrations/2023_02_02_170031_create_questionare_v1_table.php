@@ -21,6 +21,14 @@ return new class extends Migration
             $table->string('name')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
+            $table->text('s1_id')->nullable();
+            $table->text('s2_id')->nullable();
+            $table->text('s3_id')->nullable();
+            $table->text('s4_id')->nullable();
+            $table->text('s5_id')->nullable();
+            $table->text('transaction_id')->nullable();
+            $table->text('aff_id')->nullable();
+            $table->text('off_id')->nullable();
             $table->timestamps();
         });
     }

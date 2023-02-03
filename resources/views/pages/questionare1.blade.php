@@ -64,6 +64,8 @@
                     <input type="hidden" name="s5_id" value="{{ @$s_5 }}" id="">
                     <input type="hidden" name="transaction_id" value="{{ @$transaction_id }}" id="">
                     <input type="hidden" name="aff_id" value="{{ @$aff_id }}" id="">
+                    <input type="hidden" name="off_id" value="{{@$off_id}}" id="">
+
                     {{-- @method('post') --}}
                     <div class="question-Box" data-wdth="5" style="">
                         <div class="step-inrBox">

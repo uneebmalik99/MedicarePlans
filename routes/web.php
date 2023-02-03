@@ -23,3 +23,5 @@ Route::get('/thankyou',[QuestionareController::class,'page_view'])->name('thanky
 
 Route::get('/v1',[QuestionareController::class,'v1_index'])->name('v1_index');
 Route::post('/v1',[QuestionareController::class,'v1_store'])->name('v1_store');
+
+Route::get('/v2',[QuestionareController::class,'v2_index'])->name('v1_index');

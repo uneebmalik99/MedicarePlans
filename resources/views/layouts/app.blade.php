@@ -8,7 +8,7 @@
 
 <div class="top-strip">
 	<div class="container">
-    	<p>Speak with a Licensed Insurance Agent: <span>(844) 123-4567</span></p>
+    	<p>Speak with a Licensed Insurance Agent: <span>(844) 533 - 1058</span></p>
     </div>
 </div>
 
