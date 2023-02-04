@@ -39,7 +39,7 @@
     <div class="container">
         <div class="quiz-inr-box">
             <div class="box-header">
-                <h2>Compare & Find Medicare Plan <br>That's Right For You!</h2>
+                <h2>Seniors are eligible for Medicare Flex Card assistance for groceries, dentures, eyeglasses, and hearing aids based on zip code</h2>
             </div>
 
             <div class="steps-box">
@@ -69,8 +69,8 @@
                     {{-- @method('post') --}}
                     <div class="question-Box" data-wdth="5" style="">
                         <div class="step-inrBox">
-                            <p class="step-hdng">Are you currently enrolled in both Medicare Parts A & B?</p>
-                            <p class="step-sub-text">Part A covers hospital care. Part B covers medical care.</p>
+                            <p class="step-hdng">Are you interested in a 2023 Medicare plan with Flex Card benefits?</p>
+                            {{-- <p class="step-sub-text">Part A covers hospital care. Part B covers medical care.</p> --}}
                             <div class="option-box1">
                                 <label class="option-col next-btn">
                                     <input type="radio" name="med_care" value="1">

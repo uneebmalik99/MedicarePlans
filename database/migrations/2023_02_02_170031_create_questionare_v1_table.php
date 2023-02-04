@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('bd_class')->nullable();
             
             $table->string('name')->nullable();
+            $table->string('last_name')->nullable();
             $table->string('email')->nullable();
             $table->string('phone')->nullable();
             $table->text('s1_id')->nullable();

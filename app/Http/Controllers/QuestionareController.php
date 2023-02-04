@@ -277,18 +277,22 @@ class QuestionareController extends Controller
     }
     public function v1_store(Request $request){
         
-        // $dataReq = $request->all();
-        // if(preg_match('/\s/',$dataReq['name'])){
-        //     $name = explode(' ',$dataReq['name']);
-        //     $first_name = $name[0];
-        //     $last_name = $name[1];
-        //     //$request->merge(['last_name' => $last_name]);
-        //     $dataReq['first_name'] = $first_name;
-        //     $dataReq['last_name'] = $last_name;
-        // }
-        $validator = Validator::make($request->all(), [
+        
+        $dataReq = $request->all();
+        
+        if(preg_match('/\s/',$dataReq['name'])){
+            $name = explode(' ',$dataReq['name']);
+            $first_name = $name[0];
+            $last_name = $name[1];
+            //$request->merge(['last_name' => $last_name]);
+            $dataReq['name'] = $first_name;
+            $dataReq['last_name'] = $last_name;
+        }
+        
+        
+        $validator = Validator::make($dataReq , [
             'bd_class' => 'nullable|string',
-            
+            'last_name' => 'nullable|string',
             'med_care' => 'nullable|boolean',
             'name' => 'nullable|string',
             'email' => 'nullable|string|email',
@@ -314,8 +318,8 @@ class QuestionareController extends Controller
         $response = Http::asForm()->post('https://rubicon.leadspediatrack.com/post.do',[
             "lp_campaign_id"=>"63c5b3da19919",
             "lp_campaign_key"=>"xKfk6XnCW8v3rwhRqmPT",
-            "first_name" => $data['name'],
-            "last_name" => $data['last_name'] ?? null,
+            "first_name" => $dataReq['name'],
+            "last_name" => $dataReq['last_name'] ?? null,
             "Ip_response" => "JSON",
 			"lp_s1" => $data['s1_id'],
             "lp_s2" => $data['s2_id'],

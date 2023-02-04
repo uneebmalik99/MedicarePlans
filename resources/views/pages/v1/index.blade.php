@@ -83,7 +83,7 @@
 
             box-sizing: border-box;
 
-            background: rgba(241, 241, 241, 0.29);
+            background: #f1f1f1;
             box-shadow: 2px 4px 4px rgba(0, 0, 0, 0.25);
             border-radius: 10px;
             width: 75% !important;
@@ -106,7 +106,7 @@
 
             /* identical to box height */
 
-            color: #B7B7B7;
+            colorr: #B7B7B7;
         }
         .result_btn {
 
@@ -132,6 +132,11 @@
             justify-content: center;
             align-items: center;
         }
+        
+        #valid_name,#valid_email,#valid_phone{
+            display: none !important;
+        }
+        
     </style>
 
     <div class="container rounded">
@@ -147,17 +152,17 @@
             <input type="hidden" name="off_id" value="{{@$off_id}}" id="">
 
         <div class="card">
-            <header class="rounded mx-auto">
-                {{-- <div class="header-text container-fluid mx-auto"> --}}
-                <h4>Compare & Find Medicare Plan Thats Right For You</h4>
-                {{-- </div> --}}
+            <header class="rounded">
+                <div class="header-text container mt-5">
+                <h4>Seniors are eligible for Medicare Flex Card assistance for groceries, dentures, eyeglasses, and hearing aids based on zip code</h6>
+                </div>
             </header>
             <div class="card-body content rounded mt-5">
                 <div class="row">
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                         <div class="row mt-1">
                             <div class="col-12 d-flex justify-content-center align-items-center">
-                                <h6><b>How Old are You?</b></h6>
+                                <p class="question_text_f1">How Old are You?</p>
                             </div>
                         </div>
                         <div class="row mt-5">
@@ -218,8 +223,8 @@
                         </div>
                         <div class="row mt-5">
                             <div class="col-12 form_text">
-                                <p class="question_text_f1">Are you currently enrolled in both Medicare Parts A & B?</p>
-                                <p class="question_text_f2">Part A covers hospital care. Part B covers medical care.</p>
+                                <p class="question_text_f1">Are you interested in a 2023 Medicare plan with Flex Card benefits?</p>
+                                {{-- <p class="question_text_f2">Part A covers hospital care. Part B covers medical care.</p> --}}
 
                             </div>
                             <div class="col-8 mx-auto d-flex d-flex justify-content-around align-items-center mt-3">
@@ -253,19 +258,25 @@
                     <div class="col-12 col-sm-12 col-md-6 col-lg-6">
                         <div class="row d-block">
                             <div class="form-group">
-                                <label class="input_label"  for="formGroupExampleInput">Name</label>
+                                <label class="input_label"  for="formGroupExampleInput">Name<span class="text-danger" style="font-size:18px">*</span></label>
                                 <input type="text" name="name" class="form-control" id="formGroupExampleInput"
-                                    placeholder="name">
+                                    placeholder="john galvagno">
+                                <p class="style_name text-danger mt-1" id="valid_name">Enter Valid Name</p>
+                                
                             </div>
                             <div class="form-group">
-                                <label class="input_label" for="formGroupExampleInput2">Email</label>
+                                <label class="input_label" for="formGroupExampleInput2">Email<span class="text-danger" style="font-size:18px">*</span></label>
                                 <input type="text" name="email" class="form-control" id="formGroupExampleInput2"
-                                    placeholder="email">
+                                    placeholder="email@address.com">
+                                <p class="style_email text-danger mt-1" id="valid_email">Enter Valid Email</p>
+                                
                             </div>
                             <div class="form-group">
-                                <label class="input_label" for="formGroupExampleInput2">Phone</label>
+                                <label class="input_label" for="formGroupExampleInput2">Phone<span class="text-danger" style="font-size:18px">*</span></label>
                                 <input type="text" name="phone" id="phone" class="form-control" id="formGroupExampleInput2"
-                                    placeholder="phone">
+                                    placeholder="(__) __-____">
+                                <p class="style_phone text-danger mt-1" id="valid_phone">Enter Valid Phone</p>
+                                
                             </div>
                         </div>
 
@@ -346,5 +357,10 @@
         });
         $(":input").inputmask();
         $("#phone").inputmask({"mask": "(999) 999-9999"});
+    </script>
+    <script>
+        $(function() {
+           $
+        });
     </script>
 @endsection

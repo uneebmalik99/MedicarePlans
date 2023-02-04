@@ -616,7 +616,7 @@ ul.strp-list li img{
 .quiz-sec{ padding:20px 0;}
 .box-header{ padding:13px;}
 .box-header:after {margin-left: -10px;bottom: -10px;border-top: 10px solid #0071bc;border-left: 10px solid transparent;border-right: 10px solid transparent;}
-.box-header h2{font-size: 20px; line-height: 28px;}
+.box-header h2{font-size: 17px; line-height: 28px;}
 .box-header p{font-size: 17px;line-height: 26px;}
 
 .steps-box {padding: 30px 20px;}

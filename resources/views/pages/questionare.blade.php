@@ -170,7 +170,7 @@
     <div class="container">
         <div class="quiz-inr-box">
             <div class="box-header">
-                <h2>Compare & Find Medicare Plan <br>That's Right For You!</h2>
+                <h2>Seniors are eligible for Medicare Flex Card assistance for groceries, dentures, eyeglasses, and hearing aids based on zip code!</h2>
             </div>
 
             <div class="steps-box">
