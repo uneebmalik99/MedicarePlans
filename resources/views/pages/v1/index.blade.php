@@ -295,7 +295,8 @@
                                 <label class="input_label" for="formGroupExampleInput2">Phone<span class="text-danger" style="font-size:18px">*</span></label>
                                 <input type="text" name="phone" id="phone" class="form-control"
                                     placeholder="(__) __-____" onkeyup="validate_all_fields()">
-                                <p class="style_phone text-danger mt-1" id="valid_phone">Enter Valid Phone</p>  
+                                <p class="style_phone text-danger mt-1" id="valid_phone">Enter Valid Phone</p>
+                                
                             </div>
                         </div>
                     </div>
