@@ -8,7 +8,7 @@
 
 <div class="top-strip">
 	<div class="container">
-    	<p>Speak with a Licensed Insurance Agent: <span>(844) 533 - 1058</span></p>
+    	<p>Find and Compare 2023 Plans & Benefits</span></p>
     </div>
 </div>
 
@@ -16,17 +16,7 @@
         @yield('content')
 </div>
 
-<div class="include-sec">
-	<div class="container">
-    	<p class="strptxt"><span>Insurance Carriers include</span></p>
-        <ul class="strp-list">
-        	<li><img src="{{ asset('images/strp-img1.jpg') }}"></li>
-            <li><img src="{{ asset('images/strp-img2.jpg') }}"></li>
-            <li><img src="{{ asset('images/strp-img3.jpg') }}"></li>
-            <li><img src="{{ asset('images/strp-img4.jpg') }}"></li>
-        </ul>
-    </div>
-</div>
+
 
 @include('layouts.footer')
 

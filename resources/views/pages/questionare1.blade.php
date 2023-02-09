@@ -6,7 +6,6 @@
             pointer-events: none;
             cursor: default;
         }
-
         .style_date,
         .style_address,
         .style_name,
@@ -18,7 +17,6 @@
             font-size: 10px;
             font-weight: 400;
         }
-
         #valid_month,
         #valid_address,
         #valid_zip_code,
@@ -27,11 +25,9 @@
         #valid_phone {
             display: none;
         }
-
         #valid_year {
             display: none;
         }
-
         #valid_day {
             display: none;
         }
@@ -39,7 +35,7 @@
     <div class="container">
         <div class="quiz-inr-box">
             <div class="box-header">
-                <h2>Seniors are eligible for Medicare Flex Card assistance for groceries, dentures, eyeglasses, and hearing aids based on zip code</h2>
+                <h2>Uncover the Best 2023 Medicare Plan for You with Personalized Comparisons and Benefits</h2>
             </div>
 
             <div class="steps-box">
@@ -64,12 +60,12 @@
                     <input type="hidden" name="s5_id" value="{{ @$s_5 }}" id="">
                     <input type="hidden" name="transaction_id" value="{{ @$transaction_id }}" id="">
                     <input type="hidden" name="aff_id" value="{{ @$aff_id }}" id="">
-                    <input type="hidden" name="off_id" value="{{@$off_id}}" id="">
+                    <input type="hidden" name="off_id" value="{{ @$off_id }}" id="">
 
                     {{-- @method('post') --}}
                     <div class="question-Box" data-wdth="5" style="">
                         <div class="step-inrBox">
-                            <p class="step-hdng">Are you interested in a 2023 Medicare plan with Flex Card benefits?</p>
+                            <p class="step-hdng">Are you currently enrolled in Medicare Parts A and B?</p>
                             {{-- <p class="step-sub-text">Part A covers hospital care. Part B covers medical care.</p> --}}
                             <div class="option-box1">
                                 <label class="option-col next-btn">
@@ -96,12 +92,11 @@
                             </p>
                             <div class="clearall"></div>
                             <div class="fld-box">
-                                <div class="frmfield fl mm-fld">
-                                    <input type="tel" min="1" class="input-fld" id="bd_month" name="bd_month"
+                                <div class="frmfield fl mm-fld" id="frmfield_f1">
+                                    <input type="tel" min="1" class="input-fld month_bd" id="bd_month" name="bd_month"
                                         value="{{ old('bd_month') }}" placeholder="MM" maxlength="2"
-                                        onkeyup="bd_validate()">
+                                        onkeyup="bd_validate()" autofocus>
                                     <div id="valid_month" style="margin-top:66px !important;">
-
                                         <p class="style_date">Enter Valid Month</p>
                                     </div>
                                 </div>
@@ -112,16 +107,14 @@
                                     <div id="valid_day" style="margin-top:66px !important;">
                                         <p class="style_date">Enter Valid Day</p>
                                     </div>
-
                                 </div>
                                 <div class="frmfield fl yr-fld">
-                                    <input type="tel" min="1" class="input-fld" id="bd_year" name="bd_year"
-                                        value="{{ old('bd_year') }}" placeholder="YYYY" maxlength="4"
+                                    <input type="tel" min="1" class="input-fld" id="bd_year"
+                                        name="bd_year" value="{{ old('bd_year') }}" placeholder="YYYY" maxlength="4"
                                         onkeyup="bd_validate()">
                                     <div id="valid_year"style="margin-top:66px !important;">
                                         <p class="style_date">Enter Valid Year</p>
                                     </div>
-
                                 </div>
                                 <div class="clearall"></div>
                                 <a href="javascript:void(0);" class="continue-btn next-btn birthday"
@@ -140,9 +133,8 @@
                             <p class="step-sub-text">Medicare plans vary by county - this let us know what plans <br
                                     class="hide-mob">may be available to you.</p>
                             <div class="fld-box">
-
                                 <div class="frmfield fl">
-                                    <input type="tel" id="autocomplete" name="address" class="input-fld"
+                                    <input type="text" id="autocomplete" name="address" class="input-fld"
                                         value="{{ old('address') }}" placeholder="Enter Address" autocomplete="off"
                                         onkeyup="validate_address()">
                                     <div style="margin-top:58px !important;">
@@ -154,7 +146,7 @@
                                     <input type="tel" name="zip_code" id="zip_code" class="input-fld"
                                         value="{{ old('zip_code') }}" placeholder="Enter Zip"
                                         onkeyup="validate_address()">
-                                    <div style="margin-top:66px !important;">
+                                    <div style="margin-top:58px !important;">
                                         <p class="style_address" id="valid_zip_code">Enter Valid ZipCode</p>
                                     </div>
                                 </div>
@@ -239,7 +231,7 @@
                                     id="validate_email">Continue</a>
                             </div>
                             {{-- <p class="skip-text"><span class="next-btn">Skip</span></p> --}}
-                            {{--18445331058--}}
+                            {{-- 18445331058 --}}
                             <p class="call-text">Or Call: <a href="tel:18445331058">(844) 533 - 1058</a></p>
                             <div class="clearall"></div>
                             <p class="btn-back"><img src="{{ asset('images/back-arw.png') }}"><span>Previous</span></p>
@@ -248,8 +240,8 @@
 
                     <div class="question-Box" style="display:none;" data-wdth="95">
                         <div class="step-inrBox">
-                            <p class="step-hdng">Last step! Your results are ready. <br class="hide-mob">Mobile or home
-                                phone number.</p>
+                            <p class="step-hdng">Last step! Your results are ready. <br class="hide-mob">Enter phone
+                                number.</p>
 
                             <div class="fld-box">
                                 <div class="frmfield fl">
@@ -262,25 +254,20 @@
                                         <p></p>
                                     </div>
                                 </div>
-
-                                
-
-
                                 <div class="clearall"></div>
                                 <a href="javascript:void(0);" class="phone">
-                                <button class="continue-btn" id="results" type='button'
-                                    style="border: none!important;
+                                    <button class="continue-btn" id="results" type='button'
+                                        style="border: none!important;
                         outline: none!important;"
-                                    onclick="validate_phone()">
-                                    View My Results
-                                </button>
-                            </a>
+                                        onclick="validate_phone()">
+                                        View My Results
+                                    </button>
+                                </a>
                                 <p class="btn-back"><img src="{{ asset('images/back-arw.png') }}"><span>Previous</span>
                                 </p>
-
                             </div>
-
-                            <p class="btm-terms" style="margin-top:30px!important"><strong>Consent to Be Contacted</strong>. I agree to be contacted by
+                            <p class="btm-terms" style="margin-top:30px!important"><strong>Consent to Be
+                                    Contacted</strong>. I agree to be contacted by
                                 select insurance carriers and financial institutions listed <a href="#">here</a>,
                                 their agents, individual insurance agents, and/or Assurance for marketing purposes
                                 concerning insurance and/or other financial products by phone/text at my number provided
@@ -288,24 +275,20 @@
                                 number is on a do not call list, or by email at the email address I have provided. Texts
                                 about these offers may be sent from Assurance’s Shopper Alerts number, 71953 (message & data
                                 rates may apply). Consent is not required to make a purchase and I can opt out any time.</p>
-
-                                <p class="clk-terms" style="margin-top:20px!important;display:flex;">By clicking the View My Results
-                                    Button, I agree to the consents below
-                                    the button.</p>
-
-
+                            <p class="clk-terms" style="margin-top:20px!important;display:flex;">By clicking the View My
+                                Results
+                                Button, I agree to the consents below
+                                the button.</p>
                             <p class="btm-terms"><strong>Consent to Share Information.</strong> I agree to Assurance
                                 sharing my information with Prudential companies and affiliates so that they can market
                                 their products and services to me, and to Assurance sharing my information with third-party
                                 partners so that select insurers and financial institutions, and their agents, may make
                                 insurance, credit and other financial offers to me. I agree to Assurance’s <a
                                     href="#">Privacy Policy</a> and <a href="#">Terms of Service</a>.</p>
-
                             <p class="btm-terms"><strong>Medicare.</strong> If I am Medicare-eligible, I am requesting to
                                 speak with a licensed agent who is certified to discuss Medicare Advantage and Prescription
                                 Drug insurance plans. This will NOT obligate me to enroll in a plan, affect my current
                                 enrollment, or enroll me in a Medicare plan.
-
                             </p>
                         </div>
                     </div>
@@ -315,7 +298,22 @@
     </div>
 @endsection
 @section('scripts')
-<script src=//b-js.ringba.com/CAcf73f595e34a4dd68bcd8766fda14a50 async></script>  
+
+<!-- Start VWO Async SmartCode -->
+<script type='text/javascript' id='vwoCode'>
+window._vwo_code=window._vwo_code || (function() {
+var account_id=680309,
+version=1.4,
+settings_tolerance=2000,
+library_tolerance=2500,
+use_existing_jquery=false,
+is_spa=1,
+hide_element='body',
+/* DO NOT EDIT BELOW THIS LINE */
+f=false,d=document,vwoCodeEl=document.querySelector('#vwoCode'),code={use_existing_jquery:function(){return use_existing_jquery},library_tolerance:function(){return library_tolerance},finish:function(){if(!f){f=true;var e=d.getElementById('_vis_opt_path_hides');if(e)e.parentNode.removeChild(e)}},finished:function(){return f},load:function(e){var t=d.createElement('script');t.fetchPriority='high';t.src=e;t.type='text/javascript';t.innerText;t.onerror=function(){_vwo_code.finish()};d.getElementsByTagName('head')[0].appendChild(t)},getVersion:function(){return version},getMatchedCookies:function(e){var t=[];if(document.cookie){t=document.cookie.match(e)||[]}return t},getCombinationCookie:function(){var e=code.getMatchedCookies(/(?:^|;)\s?(_vis_opt_exp_\d+_combi=[^;$]*)/gi);e=e.map(function(e){try{var t=decodeURIComponent(e);if(!/_vis_opt_exp_\d+_combi=(?:\d+,?)+\s*$/.test(t)){return''}return t}catch(e){return''}});var i=[];e.forEach(function(e){var t=e.match(/([\d,]+)/g);t&&i.push(t.join('-'))});return i.join('|')},init:function(){window.settings_timer=setTimeout(function(){_vwo_code.finish()},settings_tolerance);var e=d.createElement('style'),t=hide_element?hide_element+'{opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important;}':'',i=d.getElementsByTagName('head')[0];e.setAttribute('id','_vis_opt_path_hides');vwoCodeEl&&e.setAttribute('nonce',vwoCodeEl.nonce);e.setAttribute('type','text/css');if(e.styleSheet)e.styleSheet.cssText=t;else e.appendChild(d.createTextNode(t));i.appendChild(e);var n=this.getCombinationCookie();this.load('https://dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&f='+ +is_spa+'&vn='+version+(n?'&c='+n:''));return settings_timer}};window._vwo_settings_timer = code.init();return code;}());
+</script>
+<!-- End VWO Async SmartCode -->
+    <script src=//b-js.ringba.com/CAcf73f595e34a4dd68bcd8766fda14a50 async></script>
     <script type="text/javascript">
         // Initialize and add the map
         function initMap() {
@@ -335,7 +333,6 @@
                 map: map,
             });
         }
-
         window.initMap = initMap;
     </script>
 
@@ -502,7 +499,6 @@ window.initAutocomplete = initAutocomplete;
     </script>
     <script type="text/javascript">
         $(document).ready(function() {
-
             $('.continue-btn').css('background-color', 'grey');
             // $('.next-btn').click(function(e) {
             //     var item = $(this);
@@ -521,16 +517,20 @@ window.initAutocomplete = initAutocomplete;
             //         progress();
             //     }, 300);
             // });
+
+
             $('.next-btn').click(function(e) {
-                // alert('kashif');
+                
                 var item = $(this);
                 setTimeout(function() {
+
                     var val = $(item).closest('.question-Box').find(":input").val();
                     var zip = $('#zip_code').val();
                     var month = $('#bd_month').val();
                     var year = $('#bd_year').val();
                     var day = $('#bd_day').val();
                     if (val != "") {
+
                         if ($(item).hasClass('email_div')) {
                             if (/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/.test(val)) {
                                 $(item).closest('.question-Box').hide();
@@ -538,6 +538,12 @@ window.initAutocomplete = initAutocomplete;
                             } else {
                                 alert("Fill the field with correct Email");
                             }
+                        }
+                        else if($(item).hasClass('option-col')){
+                            $(item).closest('.question-Box').hide();
+                             let currentdiv = $(item).closest('.question-Box').next('.question-Box');
+                             currentdiv.show();
+                             currentdiv.find('#bd_month').focus();
                         } else if ($(item).hasClass('address_zip')) {
                             if (val != '' && zip != '') {
                                 $(item).closest('.question-Box').hide();
@@ -546,14 +552,13 @@ window.initAutocomplete = initAutocomplete;
                                 alert('Please Enter Zip Code');
                             }
                         } else if ($(item).hasClass('birthday')) {
+                            
                             if ((month <= 12 && month >= 1) && (year >= 1900 && year < 2006) && (
                                     day <= 31 && day >= 1)) {
-                                // alert('if');
                                 $(item).closest('.question-Box').hide();
                                 $(item).closest('.question-Box').next('.question-Box').show();
                             } else {
-                                // alert('kashif');
-                                // alert('Please enter valid birth date');
+
                             }
                         } else if ($(item).hasClass('phone')) {
                             // alert('phone');
@@ -563,6 +568,7 @@ window.initAutocomplete = initAutocomplete;
 
                         } else {
                             $(item).closest('.question-Box').hide();
+                           
                             $(item).closest('.question-Box').next('.question-Box').show();
                         }
                     } else {
@@ -620,7 +626,9 @@ window.initAutocomplete = initAutocomplete;
             });
             // $("#phone").mask("(999) 999-9999");
             $(":input").inputmask();
-            $("#phone").inputmask({"mask": "(999) 999-9999"});
+            $("#phone").inputmask({
+                "mask": "(999) 999-9999"
+            });
         });
 
         function progress() {
