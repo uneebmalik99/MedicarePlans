@@ -58,7 +58,7 @@ class QuestionareController extends Controller
     public function store(Request $request)
     {
         
-        // dd($request->all());
+         
         //
         $dataReq = $request->all();
         if(preg_match('/\s/',$dataReq['first_name'])){
@@ -91,7 +91,11 @@ class QuestionareController extends Controller
             's5_id' => 'nullable',
             'transaction_id' => 'nullable',
             'aff_id' => 'nullable',
-            'off_id' => 'nullable'
+            'off_id' => 'nullable',
+            'universal_leadid' => 'nullable|string',
+            'xxTrustedFormToken' => 'nullable|string',
+            'xxTrustedFormCertUrl' => 'nullable|string',
+            'xxTrustedFormPingUrl' => 'nullable|string',
         ] 
         );
         /****
@@ -151,6 +155,9 @@ class QuestionareController extends Controller
             "city" => $data['city'],
             "email_address" => $data['email'],
 			"currently_enrolled" => $currently_enrolled ,
+            "jornaya_lead_id" => $data['universal_leadid'],
+            "trusted_form_cert_id" => $data['xxTrustedFormCertUrl'],
+            
             
 
         ]);
@@ -280,6 +287,10 @@ class QuestionareController extends Controller
         
         $dataReq = $request->all();
         
+        //universal_leadid
+        //xxTrustedFormToken
+//xxTrustedFormCertUrl
+        //xxTrustedFormPingUrl
         if(preg_match('/\s/',$dataReq['name'])){
             $name = explode(' ',$dataReq['name']);
             $first_name = $name[0];
@@ -304,7 +315,11 @@ class QuestionareController extends Controller
             's5_id' => 'nullable',
             'transaction_id' => 'nullable',
             'aff_id' => 'nullable',
-            'off_id' => 'nullable'
+            'off_id' => 'nullable',
+            'universal_leadid' => 'nullable|string',
+            'xxTrustedFormToken' => 'nullable|string',
+            'xxTrustedFormCertUrl' => 'nullable|string',
+            'xxTrustedFormPingUrl' => 'nullable|string',
             
         ]); 
         $data = $validator->validated();
@@ -331,6 +346,8 @@ class QuestionareController extends Controller
             "phone_home" => $data['phone'],
             "email_address" => $data['email'],
 			"currently_enrolled" => $currently_enrolled ,
+            "jornaya_lead_id" => $data['universal_leadid'],
+            "trusted_form_cert_id" => $data['xxTrustedFormCertUrl'],
             
 
         ]);

@@ -30,6 +30,10 @@ return new class extends Migration
             $table->text('transaction_id')->nullable();
             $table->text('aff_id')->nullable();
             $table->text('off_id')->nullable();
+            $table->text('universal_leadid')->nullable();
+            $table->text('xxTrustedFormToken')->nullable();
+            $table->text('xxTrustedFormCertUrl')->nullable();
+            $table->text('xxTrustedFormPingUrl')->nullable();
             $table->timestamps();
         });
     }

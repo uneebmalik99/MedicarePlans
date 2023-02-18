@@ -42,7 +42,6 @@
                 @if ($errors->any())
                     <div class="alert alert-danger">
                         <ul>
-                            
                             @foreach ($errors->all() as $error)
                                 <li>{{ $error }}</li>
                             @endforeach
@@ -256,6 +255,7 @@
                                     </div>
                                 </div>
                                 <div class="clearall"></div>
+                                <input id="leadid_token" name="universal_leadid" type="hidden" value=""/>
                                 <a href="javascript:void(0);" class="phone">
                                     <button class="continue-btn" id="results" type='button'
                                         style="border: none!important;
@@ -269,23 +269,23 @@
                             </div>
                             <p class="btm-terms" style="margin-top:30px!important"><strong>Consent to Be
                                     Contacted</strong>. I agree to be contacted by
-                                select insurance carriers and financial institutions listed <a href="#">here</a>,
-                                their agents, individual insurance agents, and/or Assurance for marketing purposes
+                                select insurance carriers and financial institutions listed <a href="list.php">here</a>,
+                                their agents, individual insurance agents, and/or Medicare Pronto for marketing purposes
                                 concerning insurance and/or other financial products by phone/text at my number provided
                                 above (including by autodialer, prerecorded message and/or artificial voice), even if my
                                 number is on a do not call list, or by email at the email address I have provided. Texts
-                                about these offers may be sent from Assurance’s Shopper Alerts number, 71953 (message & data
+                                about these offers may be sent from Medicare Pronto’s Shopper Alerts number (message & data
                                 rates may apply). Consent is not required to make a purchase and I can opt out any time.</p>
                             <p class="clk-terms" style="margin-top:20px!important;display:flex;">By clicking the View My
                                 Results
                                 Button, I agree to the consents below
                                 the button.</p>
-                            <p class="btm-terms"><strong>Consent to Share Information.</strong> I agree to Assurance
+                            <p class="btm-terms"><strong>Consent to Share Information.</strong> I agree to Medicare Pronto
                                 sharing my information with Prudential companies and affiliates so that they can market
-                                their products and services to me, and to Assurance sharing my information with third-party
+                                their products and services to me, and to Medicare Pronto sharing my information with third-party
                                 partners so that select insurers and financial institutions, and their agents, may make
-                                insurance, credit and other financial offers to me. I agree to Assurance’s <a
-                                    href="#">Privacy Policy</a> and <a href="#">Terms of Service</a>.</p>
+                                insurance, credit and other financial offers to me. I agree to Medicare Pronto’s <a
+                                    href="privacy.php">Privacy Policy</a> and <a href="terms.php">Terms of Service</a>.</p>
                             <p class="btm-terms"><strong>Medicare.</strong> If I am Medicare-eligible, I am requesting to
                                 speak with a licensed agent who is certified to discuss Medicare Advantage and Prescription
                                 Drug insurance plans. This will NOT obligate me to enroll in a plan, affect my current
@@ -831,5 +831,31 @@ window.initAutocomplete = initAutocomplete;
         //         $('#bd_div').addClass('next-btn');
         //     }
         // }
+        
     </script>
+    <script id="LeadiDscript" type="text/javascript">
+        (function() {
+        var s = document.createElement('script');
+        s.id = 'LeadiDscript_campaign';
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = '//create.lidstatic.com/campaign/3f941114-920b-939e-73fc-8a8e9bbdfc4b.js?snippet_version=2&f=reset';
+        var LeadiDscript = document.getElementById('LeadiDscript');
+        LeadiDscript.parentNode.insertBefore(s, LeadiDscript);
+        })();
+        </script>
+        <noscript><img src='//create.leadid.com/noscript.gif?lac=450FD1D4-AEB4-10DE-9332-71AC902F9BE1&lck=3f941114-920b-939e-73fc-8a8e9bbdfc4b&snippet_version=2' /></noscript>
+        <!-- TrustedForm -->
+<script type="text/javascript">
+    (function() {
+    var tf = document.createElement('script');
+    tf.type = 'text/javascript'; tf.async = true;
+    tf.src = ("https:" == document.location.protocol ? 'https' : 'http') + "://api.trustedform.com/trustedform.js?field=xxTrustedFormCertUrl&ping_field=xxTrustedFormPingUrl&l=" + new Date().getTime() + Math.random();
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(tf, s);
+    })();
+    </script>
+    <noscript>
+    <img src="https://api.trustedform.com/ns.gif" />
+    </noscript>
+    <!-- End TrustedForm -->
 @endsection
