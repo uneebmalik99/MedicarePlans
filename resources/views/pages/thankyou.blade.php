@@ -467,13 +467,7 @@ f=false,d=document,vwoCodeEl=document.querySelector('#vwoCode'),code={use_existi
 <script src="//thanks.medicarepronto.com/assets/lander.js"></script>
 <div id="fb-root"></div>
 <script async>
-window.addEventListener('load', function(){
-  setTimeout(function(){
-    if (window.location.href.substr(-2) !== "?R") {
-        window.location = window.location.href + "?R";
-    }
 
-}, 120000);
 	(function(d, s, id){
 	  if($('.fbCommentsPlaceholder').size()>0){
 	   var js, fjs = d.getElementsByTagName(s)[0];
@@ -986,5 +980,123 @@ f=false,d=document,vwoCodeEl=document.querySelector('#vwoCode'),code={use_existi
        });
  
 </script>
+@php $value = session('data'); 
+      
+@endphp 
+<form id="myform" name="myform" action = "" method="POST">
+            @csrf
+            <input type="hidden" name="phone_home" id = "phone_number" value = " {{@$value['phone_home']}} ">
+            <input type="hidden" name="first_name" id = "first_name" value = "{{ @$value['first_name'] }} ">
+            
+            <input type="hidden" name="last_inserted_id" id = "last_inserted_id" value = "{{ @$value['last_id']}}">
+            <input type="hidden" name="ring_call" id="ring_call" value = "">
+            
+
+
+
+        </form>
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+<script>
+        $(function(){
+            setTimeout(function() {
+              var reportEnd = new Date();
+                var reportStart = new Date();
+                reportEnd.setTime(reportEnd.getTime() + (24 * 60 * 60 * 1000));
+                
+                reportStart = reportStart.toISOString().slice(0, -5) + "Z"; 
+                reportEnd = reportEnd.toISOString().slice(0, -5) + "Z";
+                
+            var settings = {
+                "url": "https://api.ringba.com/v2/RA3e4f3ab4851a447f8ca3efa1ef7b7c1f/calllogs",
+                "method": "POST",
+                "timeout": 0,
+                "headers": {
+                    "Authorization": "Token 09f0c9f02d1046189b0f6b42a61a9ee4e966a3d88df88ba0b29a61e99832c7f63ef1c66e8a73ad7d9013b7221a6ae25bd5dc0dac9f447f97576d9a77d96db4c79407f598469024a9e741c0a69099ff10cd742681537c2280dda9f363b6d41a2d52e4dcca1836da96c4f6230cfe026360b538f112",
+                    "Content-Type": "application/json"
+                },
+                "data": JSON.stringify({
+                "reportEnd": "2023-02-04T07:59:59Z",
+                "reportStart": "2023-02-01T08:00:00Z",
+                "orderByColumns": [
+                  {
+                    "column": "inboundPhoneNumber",
+                    "direction": "desc"
+                  }
+                ],
+                "valueColumns": [
+                  {
+                    "column": "callDt"
+                  },
+                  {
+                    "column": "payoutAmount"
+                  },
+                  {
+                    "column": "inboundPhoneNumber"
+                  },
+                  {
+                    "column": "tag:InboundNumber:State"
+                  }
+            ],
+            "formatTimespans": "True",
+            "formatPercentages": "True",
+            "formatDateTime": "True",
+            "formatTimeZone": "America/New_York",
+            "size": 1000,
+            "offset": 0
+            }),
+                };
+                var clnt_phone="+1"+$("#phone_number").val().replace(/\D/g, '');
+                
+                //inboundPhoneNumber
+                $.ajax(settings).done(function (response) {
+                 console.log(response.report.records);
+
+                    for(let phone of response.report.records){
+                        if(clnt_phone == phone.inboundNumber){
+                        //console.log(phone.inboundPhoneNumber);
+                        $("#ring_call").val("true")
+                        
+                    }
+                    else{
+                        $("#ring_call").val("false")
+                        
+                    }
+                }
+                  var formData = $('#myform').serialize();
+
+                  //Use $.ajax to submit the form data
+                  $.ajax({
+                    url: '{{ route('apisave')}}',
+                    type: 'POST',
+                    data: formData,
+                    dataType: 'json',
+                    mode:'no-cors',
+                    success: function(response) {
+                      // Handle the successful response
+                      console.log(response);
+                    },
+                    error: function(xhr, status, error) {
+                      // Handle the error response
+                      
+                      console.error(xhr, status, error);
+                    }
+                  });
+                });
+                
+                // Get the form data
+             
+                 
+                // var form =document.getElementById('myform');
+                //     form.submit();
+                
+
+            }, 10000);
+            
+          });
+                
+
+
+                
+    </script>
 </body>
 </html>

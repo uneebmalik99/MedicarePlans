@@ -21,6 +21,7 @@
         #valid_address,
         #valid_zip_code,
         #valid_name,
+        #valid_lname,
         #valid_email,
         #valid_phone {
             display: none;
@@ -194,23 +195,62 @@
                     <div class="question-Box step6" style="display:none;" data-wdth="75">
                         <div class="step-inrBox">
                             <p class="step-hdng">What is your name?</p>
-
                             <div class="fld-box">
-                                <div class="frmfield fl">
-                                    <input type="text" class="input-fld" name="first_name" id="first_name"
-                                        value="{{ old('first_name') }}" placeholder="First Name"
-                                        onkeyup="spaceCheck(this.val)" required>
-                                    <div style="margin-top:66px !important;">
-                                        <p class="style_name" id="valid_name">Enter Valid Name</p>
+                                <div style="display:flex;justify-content:space-between">
+                                    <div class="frmfield fl">
+                                        <input type="text" class="input-fld" name="first_name" id="first_name" value="" placeholder="First Name" onkeyup="spaceCheck()" required style="width:96%!important;">
+                                        <div style="margin-top:66px !important;">
+                                            <p class="style_name" id="valid_name">Enter Valid First Name</p>
+                                        </div>
+                                    </div>
+                                    <div class="frmfield fl">
+                                        <input type="text" class="input-fld" name="last_name" id="last_name" value="" placeholder="Last Name" onkeyup="spaceCheck()" required>
+                                        <div style="margin-top:66px !important;">
+                                            <p class="style_name" id="valid_lname">Enter Valid Last Name</p>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="clearall"></div>
-                                <a href="javascript:void(0);" style="margin-top: 25px"
-                                    class="continue-btn next-btn firstname" id="firstname">Continue</a>
+                                <a href="javascript:void(0);" style="margin-top: 25px" class="continue-btn next-btn firstname" id="firstname">Continue</a>
                             </div>
                             <p class="call-text">Or Call: <a href="tel:18445331058">(844) 533 - 1058</a></p>
                             <div class="clearall"></div>
-                            <p class="btn-back"><img src="{{ asset('images/back-arw.png') }}"><span>Previous</span></p>
+                            <p class="btn-back"><img src=""><span>Previous</span></p>
+                        </div>
+                    </div>
+                    <div class="question-Box step7" style="display:none;" data-wdth="75">
+                        <div class="step-inrBox">
+                            <p class="step-hdng">Gender?</p>
+                            <div class="fld-box">
+    
+                                <div class="" style="display:inline-block">
+    
+    
+    
+                                    <div class="form-check" style="float:left;margin-right: 22px;margin-top: 12px;">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input"  id="gender" name="gender" value="M">  Male
+                                        </label>
+                                    </div>
+                                    <div class="form-check" style="float:right;margin-top: 12px;">
+                                        <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" id="gender" name="gender" value="F">  Female
+                                        </label>
+                                    </div>
+    
+    
+    
+                                </div>
+                                <br>
+                                <small class="validate_gender">Please Select Gender</small>
+    
+    
+                                <div class="clearall"></div>
+                                <a href="javascript:void(0);" style="margin-top: 25px" class="continue-btn next-btn" id="gender_c">Continue</a>
+                            </div>
+                            <p class="call-text">Or Call: <a href="tel:18445331058">(844) 533 - 1058</a></p>
+                            <div class="clearall"></div>
+                            <p class="btn-back"><img src=""><span>Previous</span></p>
                         </div>
                     </div>
                     <div class="question-Box" style="display:none;" data-wdth="85">
@@ -590,10 +630,13 @@ window.initAutocomplete = initAutocomplete;
                             $('#autocomplete').css('border', '1px solid red');
 
                         } else if ($(item).hasClass('firstname')) {
-
+                            $firstname = $('#first_name').val();
+                            $lastname = $('last_name').val();
                             $('#valid_name').css('display', 'block');
-
                             $('#first_name').css('border', '1px solid red');
+                            $('#valid_lname').css('display', 'block');
+                            $('#last_name').css('border', '1px solid red');
+                            
 
 
                         } else if ($(item).hasClass('email_div')) {
@@ -637,23 +680,46 @@ window.initAutocomplete = initAutocomplete;
             $(".prgress-1").css("width", progressVal + "%");
         }
 
-        function spaceCheck(val) {
-            if (val != '') {
-                $('#firstname').removeClass('disabled');
-                $('#firstname').css('background-color', 'green');
-                $('#firstname').addClass('next-btn');
-                $('#valid_name').css('display', 'none');
+        function spaceCheck() {
 
-                $('#first_name').css('border', '1px solid grey');
-            } else {
-                $('#firstname').addClass('disabled');
-                $('#firstname').css('background-color', 'grey');
-                $('#firstname').removeClass('next-btn');
-                $('#valid_name').css('display', 'block');
+$fname = $('#first_name').val();
+$lname = $('#last_name').val();
 
-                $('#first_name').css('border', '1px solid red');
-            }
-        }
+
+
+
+
+
+if ($fname.length >= 2 && $lname.length >= 2) {
+    $('#firstname').removeClass('disabled');
+    $('#firstname').css('background-color', 'green');
+    $('#firstname').addClass('next-btn');
+    $('#valid_name').css('display', 'none');
+    $('#first_name').css('border', '1px solid grey');
+} else {
+    $('#firstname').addClass('disabled');
+    $('#firstname').css('background-color', 'grey');
+    $('#firstname').removeClass('next-btn');
+    $('#valid_name').css('display', 'block');
+    $('#first_name').css('border', '1px solid red');
+}
+
+if ($fname.length >= 2) {
+    $('#valid_name').css('display', 'none');
+    $('#first_name').css('border', '1px solid grey');
+} else {
+    $('#valid_name').css('display', 'block');
+    $('#first_name').css('border', '1px solid red');
+}
+
+if ($lname.length >= 2) {
+    $('#valid_lname').css('display', 'none');
+    $('#last_name').css('border', '1px solid grey');
+} else {
+    $('#valid_lname').css('display', 'block');
+    $('#last_name').css('border', '1px solid red');
+}
+}
 
         function validateEmail(val) {
             if (/^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/.test(val)) {

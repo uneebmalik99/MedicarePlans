@@ -18,7 +18,7 @@ Route::get('/',[QuestionareController::class,'index']);
 Route::post('/thankyou',[QuestionareController::class,'store'])->name('questionare.save');
 //transaction_id s1 s2 s3 s4 s5
 Route::get('/thankyou',[QuestionareController::class,'page_view'])->name('thankyou');
-
+Route::post('/apisave',[QuestionareController::class,'api_save'])->name('apisave');
 
 
 Route::get('/v1',[QuestionareController::class,'v1_index'])->name('v1_index');

@@ -61,14 +61,7 @@ class QuestionareController extends Controller
          
         //
         $dataReq = $request->all();
-        if(preg_match('/\s/',$dataReq['first_name'])){
-            $name = explode(' ',$dataReq['first_name']);
-            $first_name = $name[0];
-            $last_name = $name[1];
-            //$request->merge(['last_name' => $last_name]);
-            $dataReq['first_name'] = $first_name;
-            $dataReq['last_name'] = $last_name;
-        }
+        
          
         $validator = Validator::make($dataReq, [
             'bd_month' => 'nullable|numeric',
@@ -92,6 +85,7 @@ class QuestionareController extends Controller
             'transaction_id' => 'nullable',
             'aff_id' => 'nullable',
             'off_id' => 'nullable',
+            'gender' => 'nullable|string',
             'universal_leadid' => 'nullable|string',
             'xxTrustedFormToken' => 'nullable|string',
             'xxTrustedFormCertUrl' => 'nullable|string',
@@ -133,12 +127,14 @@ class QuestionareController extends Controller
 		else{
 			$currently_enrolled = 'No';
 		}
-        $response = Http::asForm()->post('https://rubicon.leadspediatrack.com/post.do',[
+        $inserted = Questionaire::create($data)->id;
+
+        $response =[
             "lp_campaign_id"=>"63c5b3da19919",
             "lp_campaign_key"=>"xKfk6XnCW8v3rwhRqmPT",
             "first_name" => $data['first_name'],
             "last_name" => $data['last_name'] ?? null,
-            "Ip_response" => "JSON",
+            "lp_response" => "JSON",
 			"lp_s1" => $data['s1_id'],
             "lp_s2" => $data['s2_id'],
             "lp_s3" => $data['s3_id'],
@@ -157,22 +153,16 @@ class QuestionareController extends Controller
 			"currently_enrolled" => $currently_enrolled ,
             "jornaya_lead_id" => $data['universal_leadid'],
             "trusted_form_cert_id" => $data['xxTrustedFormCertUrl'],
-            
-            
+            "gender" => $data['gender'],
+            "last_id" => $inserted,
+            ];
+        
+        session(['data' => $response]);
+        $query=['transaction_id'=>$data['transaction_id'],'sub1'=>$data['s1_id'], 'sub2'=>$data['s2_id'] , 'sub3' => $data['s3_id'],'sub4' => $data['s4_id'],'sub5' => $data['s5_id'],'affid'=>$data['aff_id'],'offid' => $data['off_id'],'first_name'=>$data['first_name'],'age' => $age,'zip_code' => $data['zip_code']];
+        return redirect()->route('thankyou',$query);
 
-        ]);
-        if($response->successful()){
-            logger($response);
-            $query=['transaction_id'=>$data['transaction_id'],'sub1'=>$data['s1_id'], 'sub2'=>$data['s2_id'] , 'sub3' => $data['s3_id'],'sub4' => $data['s4_id'],'sub5' => $data['s5_id'],'affid'=>$data['aff_id'],'offid' => $data['off_id'],'age' => $age,'zip_code' => $data['zip_code']];
-            $inserted = Questionaire::create($data);
-            return redirect()->route('thankyou',$query);
-
-        }
-        else{
-            $query=['sub1'=>$data['s1_id'], 'sub2'=>$data['s2_id'] , 'sub3' => $data['s3_id'],'sub4' => $data['s4_id'],'sub5' => $data['s5_id'],'age' => $age,'transaction_id'=>$data['transaction_id'],'offid' => $data['off_id'],'affid'=>$data['aff_id'],'zip_code' => $data['zip_code']];
-
-            return redirect()->route('thankyou',$query);
-        }
+        
+        
         /***
          * https://rubicon.leadspediatrack.com/posting-instructions.html?c=5&type=Server
          * lp_campaign_id=63c5b332bc6d5
@@ -213,6 +203,56 @@ class QuestionareController extends Controller
         
     
         
+    }
+    public function api_save(Request $request){
+        $question = Questionaire::find($request->last_inserted_id);
+        
+        $question->ringba_call = $request->ring_call;
+         
+        $question->save();
+        $year = $question -> bd_year;
+        $month = $question -> bd_month;
+        $day = $question -> bd_day;
+        if(isset($question->med_care) && $question->med_care == 1){
+			$currently_enrolled = 'Yes';
+		}
+		else{
+			$currently_enrolled = 'No';
+		}
+        $dob = strval($year).'-'.strval($month).'-'.strval($day);
+        $response = Http::asForm()->post('https://rubicon.leadspediatrack.com/post.do',[
+            "lp_campaign_id"=>"63c5b3da19919",
+            "lp_campaign_key"=>"xKfk6XnCW8v3rwhRqmPT",
+            "first_name" => $question -> first_name,
+            "last_name" => $question -> last_name ?? null,
+            "Ip_response" => "JSON",
+			"lp_s1" => $question -> s1_id,
+            "lp_s2" => $question -> s2_id,
+            "lp_s3" => $question -> s3_id,
+            "lp_s4" => $question -> s4_id,
+            "lp_s5" => $question -> s5_id,
+            "transaction_id" => $question -> transaction_id,
+            "affiliate_id" => $question -> aff_id,
+            "dob" => $dob,
+            "address" => $question -> address,
+            "phone_home" => $question -> phone,
+            "zip_code" => $question -> zip_code,
+            "country" => $question -> country,
+            "state" => $question -> state,
+            "city" => $question -> city,
+            "email_address" => $question -> email,
+			"currently_enrolled" => $currently_enrolled ,
+            "jornaya_lead_id" => $question -> universal_leadid,
+            "trusted_form_cert_id" => $question -> xxTrustedFormCertUrl,
+            "ringba_call" => $question -> ringba_call,
+            
+
+        ]);
+        if($response->successful()){
+            return response()->json([
+                'message' => "updated successfully"
+            ]);
+        }
     }
 
     /**
