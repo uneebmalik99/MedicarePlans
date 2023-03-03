@@ -176,31 +176,38 @@ if __name__ == "__main__":
 
 		startTime = get_time_stamp(-30)
 		endTime = get_time_stamp(0)		
-		#file1 = open("logging.txt", "a")  # append mode
-		#file1.write(str(record))
+		
+		birthday = (str(record[4]),str(record[2]),str(record[3]))
+		dob = "-".join(birthday)
+		
 		post_array = {
-			"lp_campaign_id" : "63eabc1693191",
-			"lp_campaign_key" : "Njd4gbvxL7GzJKXn6Hty",
-			"first_name" : record[8],
-			"last_name":record[9],
-			"phone_home":record[10],
+			"lp_campaign_id" : "63c5b3da19919",
+			"lp_campaign_key" : "xKfk6XnCW8v3rwhRqmPT",
+			"first_name" : record[13],
+			"last_name":record[14],
+			"phone_home":record[12],
 			"email_address":record[11],
 			"lp_response" : "JSON",
-			"lp_s1" : record[12],
-			"lp_s2" : record[13],
-			"lp_s3" : record[14],
-			"lp_s4" : record[15],
-			"lp_s5" : record[16],
-			"transaction_id" : record[17],
-			"affiliate_id" : record[18],
-			"age_range" : record[1],
-			"monthly_income" : record[2],
-			"On_Medicare" : record[3],
-			#	 "email_address" => $row['email'],
-			"jornaya_lead_id" : record[20],
-			"trusted_form_cert_id" : record[21],
+			"lp_s1" : record[16],
+			"lp_s2" : record[17],
+			"lp_s3" : record[18],
+			"lp_s4" : record[19],
+			"lp_s5" : record[20],
+			"transaction_id" : record[21],
+			"affiliate_id" : record[22],
+			"dob" : dob,
+            "address" : record[15],
+            "phone_home" : record[12],
+            "zip_code" : record[5],
+            "country" : record[8],
+            "state" : record[9],
+            "city" : record[10],
+            "email_address" : record[11],
+			"currently_enrolled" : 'Yes' if record[0] else 'No', 
+			"jornaya_lead_id" : record[24],
+			"trusted_form_cert_id" : record[25],
 			"ringba_call" : ringba,
-			"gender" : record[24]
+			"gender" : record[30]
 		}
 
 		phoneStripped = re.sub('[^0-9]','', phone)
