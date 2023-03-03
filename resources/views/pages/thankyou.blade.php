@@ -981,7 +981,8 @@ f=false,d=document,vwoCodeEl=document.querySelector('#vwoCode'),code={use_existi
  
 </script>
 @php $value = session('data'); 
-      
+     $last_id = $value['last_id'];
+     $phone_num = $value['phone_home'];
 @endphp 
 <form id="myform" name="myform" action = "" method="POST">
             @csrf
@@ -995,8 +996,7 @@ f=false,d=document,vwoCodeEl=document.querySelector('#vwoCode'),code={use_existi
 
 
         </form>
-        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
-<script>
+
         $(function(){
             setTimeout(function() {
               var reportEnd = new Date();
@@ -1099,4 +1099,27 @@ f=false,d=document,vwoCodeEl=document.querySelector('#vwoCode'),code={use_existi
                 
     </script>
 </body>
+<script type="text/javascript">
+  window.onload = function() {
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/pyscript');
+    xhr.onload = function() {
+        if (xhr.status === 200) {
+            var response = JSON.parse(xhr.responseText);
+            console.log(response.message);
+        }
+    };
+    var formData = new FormData();
+    phone_num = document.getElementById('phone_number');
+    last_id = document.getElementById('last_inserted_id');
+    formData.append('phone_number',phone_num.value);
+    formData.append('last_id',last_id.value);
+    formData.append('_token',"{{ csrf_token() }}");
+    xhr.send(formData);
+
+};
+  
+  
+  
+  </script>
 </html>

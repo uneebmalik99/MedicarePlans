@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Arr;
 use App\Models\QuestionnaireV1;
+use Symfony\Component\Process\Process;
+use Symfony\Component\Process\Exception\ProcessFailedException;
 use Carbon\Carbon;
 
 class QuestionareController extends Controller
@@ -250,9 +252,31 @@ class QuestionareController extends Controller
         ]);
         if($response->successful()){
             return response()->json([
-                'message' => "updated successfully"
+                'message' => "Updated Successfully"
             ]);
         }
+    }
+
+    public function pyscript(Request $request){
+        $data  = $request->all();
+
+        
+        $phone_num = $data['phone_number'];
+        $last_id = $data['last_id'];
+        
+        $output = [];
+        $return_var = 0;
+        exec('python ' . base_path('app\Pyscripts\automation.py'." ".escapeshellarg($phone_num)." ".escapeshellarg($last_id)), $output, $return_var);
+        if ($return_var === 0) {
+            // The Python script ran successfully
+            return implode("\n", $output);
+        } else {
+            // There was an error running the Python script
+            return 'Error running script';
+        }
+
+
+
     }
 
     /**

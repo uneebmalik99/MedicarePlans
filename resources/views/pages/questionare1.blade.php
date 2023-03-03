@@ -10,7 +10,8 @@
         .style_address,
         .style_name,
         .style_email,
-        .style_phone {
+        .style_phone,
+        .style_gender {
             margin-top: 3px;
             margin-bottom: 5px;
             color: red;
@@ -23,6 +24,7 @@
         #valid_name,
         #valid_lname,
         #valid_email,
+        #valid_gender,
         #valid_phone {
             display: none;
         }
@@ -242,11 +244,11 @@
     
                                 </div>
                                 <br>
-                                <small class="validate_gender">Please Select Gender</small>
+                                <small class="style_gender" id="valid_gender">Please Select Gender</small>
     
     
                                 <div class="clearall"></div>
-                                <a href="javascript:void(0);" style="margin-top: 25px" class="continue-btn next-btn" id="gender_c">Continue</a>
+                                <a href="javascript:void(0);" style="margin-top: 25px" class="continue-btn next-btn gender_c" >Continue</a>
                             </div>
                             <p class="call-text">Or Call: <a href="tel:18445331058">(844) 533 - 1058</a></p>
                             <div class="clearall"></div>
@@ -646,7 +648,11 @@ window.initAutocomplete = initAutocomplete;
                             $('#email').css('border', '1px solid red');
 
 
-                        } else {
+                        } else if($(item).hasClass('gender_c')){
+                                    console.log("its here")
+                               
+                        }
+                         else {
 
                             alert("fill the field");
                         }
@@ -862,6 +868,7 @@ if ($lname.length >= 2) {
 
             }
         }
+        
         // function monthSelect(val){
 
         //     let month = val;
